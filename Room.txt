@@ -1,4 +1,4 @@
-roomId,roomFloorId,roomName,roomDescr,itemId1,itemId2,itemId3,puzzleId1,puzzleId2,monsterId1,monsterId2,roomExits, 
+roomId,roomFloorId,roomName,roomDescr,itemId1,itemId2,itemId3,puzzleId1,puzzleId2,monsterId1,monsterId2,roomExits 
 0,1,Outside,You find yourself outside a large building, near the edge of a compound. The light of the full moon illuminates two possible entrances into the building: 
 1. a window overlooking a garden of overgrown plants
 2. a backdoor with a flickering red light above it. 
@@ -6,7 +6,7 @@ Which do you choose?
 Type WINDOW or BACKDOOR
 ,0,0,0,0,0,0,0,START,NORTH:-1,SOUTH:2,WEST:1,EAST:-1
 1,1,Backdoor Vestibule,A cramped vestibule smells of oil and dust. The keypad’s tiny screen still glows, a dull, satisfied green.,2,0,0,1,0,0,0,NORTH:-1,SOUTH:-1,WEST:3,EAST:0
-2,1,Garden Window Ledge,A narrow stone ledge hugs the garden wall. Curtains breathe through a cracked sash; spiders flee from your shadow.],0,0,0,2,0,0,0,NORTH:-1,SOUTH:-1,WEST:4,EAST:0
+2,1,Garden Window Ledge,A narrow stone ledge hugs the garden wall. Curtains breathe through a cracked sash; spiders flee from your shadow.,0,0,0,2,0,0,0,NORTH:-1,SOUTH:-1,WEST:4,EAST:0
 3,1,Service Corridor,[Bleach stings your nose. Cardboard towers lean over the scuffed linoleum floor.,3,0,0,0,0,0,0,NORTH:-1,SOUTH:4,WEST:5,EAST:1
 4,1,Kitchen,Warm light, hotter tempers. A chef mutters at a pan that sizzles like rain.,0,0,0,0,6,0,0,NORTH:3,SOUTH:-1,WEST:6,EAST:2
 5,1,Loading Bay,Crates line the concrete; a dolly track points towards a driveway.,2,12,0,0,0,1,2,NORTH:-1,SOUTH:-1,WEST:-1,EAST:3
@@ -36,4 +36,5 @@ Type WINDOW or BACKDOOR
 29,4,Service Loft,Bare rafters and a network of ducts seems to all connect here.,6,0,0,0,0,4,0,NORTH:27,SOUTH:-1,WEST:-1,EAST:-1
 30,4,Vault,Polished steel door with multi-step code.,0,0,0,9,10,0,0,NORTH:-1,SOUTH:-1,WEST:-1,EAST:2
 31,4,North Landing,A calm junction washed in cool light; footprints cross and recross the dust in orderly loops.,0,0,0,0,0,0,0,NORTH:-1,SOUTH:25,WEST:32,EAST:-1
+
 32,4,Security Chamber,Computers beeping; one monitor screen turned on waiting for password input; locked file cabinet.,2,0,0,0,0,4,0,NORTH:-1,SOUTH:-1,WEST:28,EAST:31
