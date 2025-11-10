@@ -1,0 +1,312 @@
+/* The FileLoader parses all textfiles and loads them into the game
+*    This is just a template for now. Will make edits once txt files are uploaded.
+*/
+
+import java.io.*;
+import java.util.*;
+
+public class FileLoader
+{
+  private Map<Integer, Room> gameMap = new HashMap<>();
+  private ArrayList<Item> itemAL = new ArrayList<>();
+  private ArrayList<Puzzle> puzzleAL = new ArrayList<>();
+  private ArrayList<Character> charAL = new ArrayList<>();
+  private ArrayList<Player> playerAL = new ArrayList<>();
+
+  public Map<Integer, Room> loadRooms(String fileName)
+  {
+    try(Scanner scan = new Scanner(new File(fileName)))
+    {
+      while(scan.hasNextLine())
+      {
+        String line = scan.nextLine().trim();
+        try(Scanner scan2 = new Scanner(line))
+        {
+          scan2.useDelimiter("%");
+
+          int roomID = scan2.nextInt();
+          int roomFloorID = scan2.nextInt();
+          String roomName = scan2.next();
+          String roomDesc = scan2.next();
+          int itemID = scan2.nextInt();
+          int puzzleID = scan2.nextInt();
+          int monsterID = scan2.nextInt();
+          boolean visited = scan2.nextBoolean();
+          String [] roomExits = scan2.next().split(",");
+
+          Room room = new Room(roomID, roomFloorID, roomName, roomDesc, 
+            itemID, puzzleID, monsterID);
+
+          //add exits for each room
+          room.addExit("north", Integer.parseInt(roomExits[0]));
+          room.addExit("east", Integer.parseInt(roomExits[0]));
+          room.addExit("south", Integer.parseInt(roomExits[0]));
+          room.addExit("west", Integer.parseInt(roomExits[0]));
+
+          //add rooms to game map
+          gameMap.put(roomID, room);
+        }
+
+        catch(exception e)
+        {
+          System.out.println("Error parsing line: " + line);
+          e.printStackTrace();
+        }
+      }
+    }
+
+    catch(FileNotFoundException fnfe)
+    {
+    System.out.println("Rooms file not found.");
+    fnfe.printStackTrace();
+    }
+
+    return gameMap;
+  }
+
+  public ArrayList<Item> loadItems(String fileName)
+  {
+    try(Scanner scan = new Scanner(new File(fileName)))
+    {
+      while(scan.hasNextLine())
+      {
+        String line = scan.nextLine().trim();
+        try(Scanner scan2 = new Scanner(line))
+        {
+          scan2.useDelimiter("%");
+
+          int itemID = scan2.nextInt();
+          String itemName = scan2.next();
+          String itemDesc = scan2.next();
+          String itemType = scan2.next();
+          int itemValue = scan2.nextInt();
+          int itemRoomID = scan2.nextInt();
+          
+          Item item;
+
+          switch(itemType)
+          {
+          case "Weapon" ->
+          item = new Weapon(itemName, itemDesc, itemValue);
+          case "Consumable" ->
+          item = new Consumable(itemName, itemDesc, itemValue);
+          case "Useable" ->
+          item = new Useable(itemName, itemDesc, itemValue);
+
+          default ->
+          {
+          Sytem.out.println("Unknown item type.");
+          continue;
+          }
+          }
+
+          itemAL.add(item);
+
+          Room room = gameMap.get(itemID);
+
+          //room exists
+          if(room != null)
+          {
+            room.addItem(item);
+          }
+
+          //room does not exist
+          else
+          {
+            System.out.println("Room " + itemRoomID +
+              " not found for item" + itemName);
+          }
+        }
+
+        catch(Exception e)
+        {
+          System.out.println("Error parsing line: " + line);
+          e.printStackTrace();
+        }
+      }
+    }
+
+    catch(FileNotFoundException fnfe)
+    {
+      System.out.println("Items file not found.");
+      fnfe.printStackTrace();
+    }
+
+    return itemAL;
+  }
+
+
+  public ArrayList<Puzzle> loadPuzzles(String fileName)
+  {
+    try(Scanner scan = new Scanner(new File(fileName)))
+    {
+      while(scan.hasNextLine())
+      {
+        String line = scan.nextLine().trim();
+        try(Scanner scan2 = new Scanner(line))
+        {
+          scan2.useDelimiter("%");
+
+          int puzzleID = scan2.nextInt();
+          String puzzleQ = scan2.next();
+          String puzzleA = scan2.next();
+          int numAttempts = scan2.nextInt();
+          int remainingAttempts = scan2.nextInt();
+          boolean solved = scan2.nextBoolean();
+          int puzzleRoomID = scan2.nextInt();
+          
+          Puzzle puzzle = new Puzzle(puzzleID, puzzleQ, puzzleA, numAttempts,
+            remainingAttempts, solved);
+
+          puzzleAL.add(puzzle);
+
+          Room room = gameMap.get(puzzleRoomID);
+
+          //room exists
+          if(room != null)
+          {
+            room.addItem(puzzle);
+          }
+
+          //room does not exist
+          else
+          {
+            System.out.println("Room " + puzzleRoomID +
+              " not found for puzzle" + puzzleID);
+          }
+        }
+
+        catch(Exception e)
+        {
+          System.out.println("Error parsing line: " + line);
+          e.printStackTrace();
+        }
+      }
+    }
+
+    catch(FileNotFoundException fnfe)
+    {
+      System.out.println("Puzzles file not found.");
+      fnfe.printStackTrace();
+    }
+
+    return puzzleAL;
+  }
+
+
+  public ArrayList<Character> loadChars(String fileName)
+  {
+    try(Scanner scan = new Scanner(new File(fileName)))
+    {
+      while(scan.hasNextLine())
+      {
+        String line = scan.nextLine().trim();
+        try(Scanner scan2 = new Scanner(line))
+        {
+          scan2.useDelimiter("%");
+
+          int charID = scan2.nextInt();
+          String charName = scan2.next();
+          String charDesc = scan2.next();
+          int charRoomID = scan2.nextInt();
+          
+          Character char = new Character(charID, charName, charDesc, charRoomID);
+
+          charAL.add(char);
+
+          Room room = gameMap.get(charRoomID);
+
+          //room exists
+          if(room != null)
+          {
+            room.addItem(char);
+          }
+
+          //room does not exist
+          else
+          {
+            System.out.println("Room " + charRoomID +
+              " not found for character" + charID);
+          }
+        }
+
+        catch(Exception e)
+        {
+          System.out.println("Error parsing line: " + line);
+          e.printStackTrace();
+        }
+      }
+    }
+
+    catch(FileNotFoundException fnfe)
+    {
+      System.out.println("Characters file not found.");
+      fnfe.printStackTrace();
+    }
+
+    return charAL;
+  }
+
+
+  public ArrayList<Player> loadPlayers(String fileName)
+  {
+    try(Scanner scan = new Scanner(new File(fileName)))
+    {
+      while(scan.hasNextLine())
+      {
+        String line = scan.nextLine().trim();
+        try(Scanner scan2 = new Scanner(line))
+        {
+          scan2.useDelimiter("%");
+
+          String playerName = scan2.next();
+          int playerHP = scan2.nextInt();
+          int playerDamage = scan2.nextInt();
+          
+          Player player = new Player(playerName, playerHP, playerDamage);
+
+          playerAL.add(player);
+        }
+        
+        catch(Exception e)
+        {
+          System.out.println("Error parsing line: " + line);
+          e.printStackTrace();
+        }
+      }
+    }
+
+    catch(FileNotFoundException fnfe)
+    {
+      System.out.println("Characters file not found.");
+      fnfe.printStackTrace();
+    }
+
+    return playerAL;
+  }
+
+  public Map<Integer, Room> getRoomMap() 
+	{
+		return gameMap;
+	}
+
+	public ArrayList<Item> getItemList() 
+	{
+		return itemAL;
+	}
+
+	public ArrayList<Puzzle> getPuzzleList() 
+	{
+		return puzzleAL;
+	}
+
+	public ArrayList<Monster> getCharList() 
+	{
+		return charAL;
+	}
+
+	public ArrayList<Player> getPlayerList() 
+	{
+		return playerAL;
+	}
+}
