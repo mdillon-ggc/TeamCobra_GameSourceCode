@@ -1,3 +1,12 @@
 A-01%Revolver%a type of handgun with a revolving cylinder that holds several cartridges%weapon%100%R10
 A-02%Bullets%a projectile fired from a gun%consumable%100%R01, R10, R25
-A-03%Gold Coins%goil coins%currency%100%???
+A-03%Gold Coins%gold coins%currency%100%???
+A-04%Pocket Knife%a folding knife small enough to be carried in a pocket or bag%weapon%3%R00
+A-05%Lockpick%opens locked containers/doors; 80% chance of working success%usable%0%R00
+A-06%Medkit%a bag containing medical supplies for immediate first aid%consumable%20%R21, R24, R25
+A-07%EMP Charge%Disables cameras in R22, R26, R32 for 7 turns and disables pressure plates for P-07%useable%0%R18
+A-08%Keycard A%opens R17 and R18%usable%0%R12
+A-09%Keycard B%Opens doors on F4/security office%usable%0%R06
+A-10%Fingerprint spoofer%Used to spoof a biometric fingerprint scanner%consumable%0%
+A-11%Smoke Bomb%Creates smoke cloud for 3 turns & brakes enemy line of sight, using it will lower Detection (-2)%usable%0%
+A-12%Clue Fragment #1%“Whatever you do, stay alive!”%consumable%0%R05
