@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Room 
 {
-    private int roomId;
+    private int roomID;
     private String roomName;
     private String roomDescr;
     private boolean visited;
@@ -18,12 +18,12 @@ public class Room
     private Map<String, Integer> exits;
     private List<Item> items;
     private Puzzle puzzle;
-    private Monster monster;
+    private Character monster;
 
     
     public Room(int roomId, String roomName, String roomDescr,) 
     {
-        this.roomId = roomId;
+        this.roomID = roomID;
         this.roomName = roomName;
         this.roomDescr = roomDescr;
         this.visited = false;
@@ -31,9 +31,9 @@ public class Room
         this.items = new ArrayList<>();
     }
 
-    public int getRoomId() 
+    public int getRoomID() 
     { 
-    	return roomId; 
+    	return roomID; 
     }
     public String getRoomName() 
     { 
@@ -95,10 +95,10 @@ public class Room
         }
     }
 
-    public void addExit(String direction, int roomId) 
+    public void addExit(String direction, int roomID) 
     {
-        if (roomId != 0)
-            exits.put(direction.toUpperCase(), roomId);
+        if (roomID != -1)
+            exits.put(direction.toUpperCase(), roomID);
     }
 
     public Integer getExit(String direction) 
@@ -178,12 +178,12 @@ public class Room
     }
 
     
-    public Monster getMonster() 
+    public Character getMonster() 
     {
         return monster;
     }
 
-    public void setMonster(Monster monster) 
+    public void setMonster(Character monster) 
     {
         this.monster = monster;
     }
@@ -203,4 +203,5 @@ public class Room
         }
     }
 }
+
 
