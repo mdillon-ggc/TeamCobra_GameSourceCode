@@ -1,0 +1,11 @@
+# id|name|location|description|answer|maxAttempts
+1|Backdoor Keypad|R01|You see a keypad by the backdoor. The shipping label might have a clue.|5711|3
+2|Window Latch|R02|The window is locked. Use your lockpick.|lockpick|3
+3|Desk Lock|R10|A desk drawer is locked. You can pick or break it.|crowbar|3
+4|Laser Timing|R09|Multiple red lasers move in different directions. Choose a dance: 1. Cha-cha 2. Stayin’ Alive 3. Macarena 4. Cotton Eye Joe|2|3
+5|Wall Safe|R12|A wall safe sits behind a painting. Enter the correct 4-digit code.|1815|3
+6|Breaker Routing|R17|An electrical panel hums quietly. Which wire do you cut? (red, green, blue, yellow)|yellow|3
+7|Sensor Plate Bypass|R26|A series of pressure plates block your path. Say the magic words.|no more plates|3
+8|Biometric Spoof|R27|A fingerprint scanner awaits a valid print. Use your spoofer.|spoofer|3
+9|Vault Keypad Step|R30|A keypad asks for a secret code. Use the one from your clue fragment.|9110|3
+10|Vault Final Code|R30|Multiple locks guard the vault door. Enter the final phrase.|alpha-9-tango-bravo|3
