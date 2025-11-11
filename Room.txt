@@ -1,40 +1,33 @@
-roomId,roomFloorId,roomName,roomDescr,itemId1,itemId2,itemId3,puzzleId1,puzzleId2,monsterId1,monsterId2,roomExits 
-0,1,Outside,You find yourself outside a large building, near the edge of a compound. The light of the full moon illuminates two possible entrances into the building: 
-1. a window overlooking a garden of overgrown plants
-2. a backdoor with a flickering red light above it. 
-Which do you choose? 
-Type WINDOW or BACKDOOR
-,0,0,0,0,0,0,0,START,NORTH:-1,SOUTH:2,WEST:1,EAST:-1
-1,1,Backdoor Vestibule,A cramped vestibule smells of oil and dust. The keypad’s tiny screen still glows, a dull, satisfied green.,2,0,0,1,0,0,0,NORTH:-1,SOUTH:-1,WEST:3,EAST:0
-2,1,Garden Window Ledge,A narrow stone ledge hugs the garden wall. Curtains breathe through a cracked sash; spiders flee from your shadow.,0,0,0,2,0,0,0,NORTH:-1,SOUTH:-1,WEST:4,EAST:0
-3,1,Service Corridor,[Bleach stings your nose. Cardboard towers lean over the scuffed linoleum floor.,3,0,0,0,0,0,0,NORTH:-1,SOUTH:4,WEST:5,EAST:1
-4,1,Kitchen,Warm light, hotter tempers. A chef mutters at a pan that sizzles like rain.,0,0,0,0,6,0,0,NORTH:3,SOUTH:-1,WEST:6,EAST:2
-5,1,Loading Bay,Crates line the concrete; a dolly track points towards a driveway.,2,12,0,0,0,1,2,NORTH:-1,SOUTH:-1,WEST:-1,EAST:3
-6,1,Security Room,Banks of monitors blink with grainy footage; a faint fan hum undercuts the silence. Two feeds are already dark - someone’s tampered with the system.,9,0,0,0,0,2,0,NORTH:-1,SOUTH:-1,WEST:7,EAST:4
-7,1,Main Stairway,Marble steps sweep upward beneath towering portraits; each step sends a soft echo spiraling into the dark above.,0,0,0,0,0,0,0,NORTH:-1,SOUTH:-1,WEST:-1,EAST:6
-8,2,Landing Hall,Plush carpet runner, faint classical music, and the lingering trace of cologne - this landing feels recently traveled.,3,0,0,0,0,0,0,NORTH:-1,SOUTH:9,WEST:7,EAST:10
-9,2,Gallery,Golden frames glitter along velvet walls; pairs of painted eyes follow your hands as you walk.,3,0,0,4,0,0,0,NORTH:8,SOUTH:-1,WEST:-1,EAST:13
-10,2,Study,A quiet study room with a large oak desk contains a locked drawer.,2,1,21,3,0,5,0,NORTH:-1,SOUTH:-1,WEST:8,EAST:-1
-11,2,Private Lounge,Deep chairs placed around a low table set made of crystal; the room smells faintly of smoke and expensive secrets.,0,0,0,0,0,2,1,NORTH:-1,SOUTH:12,WEST:-1,EAST:-1
-12,2,Office,An office with a view! And a wall safe behind some artwork.,8,0,0,5,0,0,0,NORTH:11,SOUTH:13,WEST:-1,EAST:-1
-13,2,East Hall,A long corridor of polished wood and shadowed corners; a draft fingers the candle cups along the wall.,0,0,0,0,0,3,0,NORTH:12,SOUTH:-1,WEST:9,EAST:14
-14,2,Balcony Walkway,Night air presses cool against your skin; stone columns feel cold to the touch.,0,0,0,0,0,0,0,NORTH:15,SOUTH:-1,WEST:13,EAST:16
-15,2,Guest Suite,Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.,3,6,0,0,0,3,0,NORTH:-1,SOUTH:14,WEST:-1,EAST:-1
-16,2,South Stairway,Stone steps tighten into a narrow well; the temperature drops and the air feels damp.,0,0,0,0,0,0,0,NORTH:23,SOUTH:-1,WEST:-1,EAST:14
-17,3,Security Hub,Blinking panels and screens on a wall.,0,0,0,6,0,0,0,NORTH:22,SOUTH:-1,WEST:18,EAST:24
-18,3,Server Closet,The humming sound and heat of server racks fills the room. Status LEDs stutter like a city at night behind glass panels.,7,0,0,0,0,7,0,NORTH:-1,SOUTH:-1,WEST:-1,EAST:17
-19,3,Maintenance Shaft / Closet,Detergent and dust gathered over coils of hose and a dented mop bucket; the walls are close and this space is cramped.,3,0,0,0,0,0,0,NORTH:24,SOUTH:-1,WEST:-1,EAST:-1
-20,3,North Stairway,A sterner stairway in raw concrete and steel - functional and echo-prone if you are in a hurry.,0,0,0,0,0,3,0,NORTH:-1,SOUTH:23,WEST:21,EAST:-1
-21,3,Hall of Wonders,Marvelous contraptions on display pedestals; lights are bright in here;,6,0,0,0,0,0,0,NORTH:-1,SOUTH:-1,WEST:22,EAST:20
-22,3,Camera Room,A desk with two monitors displaying multiple camera feeds; lights are turned off.,0,0,0,0,0,2,0,NORTH:-1,SOUTH:17,WEST:-1,EAST:21
-23,3,South Landing,A small square of carpet and dim lighting; scuffs at the threshold suggest frequent patrol turns.,0,0,0,0,0,0,0,NORTH:20,SOUTH:-1,WEST:24,EAST:-1
-24,3,Armory Annex,Lockers and a bolted workbench; the smell of gun oil sits heavy in the cold, dry air.,14,16,6,0,0,9,0,NORTH:-1,SOUTH:19,WEST:17,EAST:23
-25,4,Observation Room,Telescope by the east window; the starry night is visible outside through the open window; large wooden chest near the telescope.,3,2,6,0,0,8,0,NORTH:31,SOUTH:-1,WEST:27,EAST:-1
-26,4,Vault Corridor West,Floor pressure sensors,0,0,0,7,0,4,0,NORTH:-1,SOUTH:-1,WEST:30,EAST:27
-27,4,Vault Corridor East,A thick steel door stands with biometric pads awaiting a fingerprint to activate.],3,0,0,8,0,0,0,NORTH:32,SOUTH:29,WEST:26,EAST:25
-28,4,Workshop,[Tools and papers scattered around on a large table - looks like an unfinished project.,3,19,0,0,0,3,0,NORTH:-1,SOUTH:-1,WEST:-1,EAST:-32
-29,4,Service Loft,Bare rafters and a network of ducts seems to all connect here.,6,0,0,0,0,4,0,NORTH:27,SOUTH:-1,WEST:-1,EAST:-1
-30,4,Vault,Polished steel door with multi-step code.,0,0,0,9,10,0,0,NORTH:-1,SOUTH:-1,WEST:-1,EAST:2
-31,4,North Landing,A calm junction washed in cool light; footprints cross and recross the dust in orderly loops.,0,0,0,0,0,0,0,NORTH:-1,SOUTH:25,WEST:32,EAST:-1
-
-32,4,Security Chamber,Computers beeping; one monitor screen turned on waiting for password input; locked file cabinet.,2,0,0,0,0,4,0,NORTH:-1,SOUTH:-1,WEST:28,EAST:31
+0%1%Outside%You find yourself outside a large building, near the edge of a compound. The light of the full moon illuminates two possible entrances into the building: 1. a window over looking a garden of overgrown plants. 2. a backdoor with a flickering red light above it. Which do you choose? Type WINDOW or BACKDOOR%-1,2,1,-1
+1%1%Backdoor Vestibule%A cramped vestibule smells of oil and dust. The keypad’s tiny screen still glows, a dull, satisfied green.%-1,-1,3,0
+2%1%Garden Window Ledge%A narrow stone ledge hugs the garden wall. Curtains breathe through a cracked sash; spiders flee from your shadow.%-1,-1,4,0
+3%1%Service Corridor%Bleach stings your nose. Cardboard towers lean over the scuffed linoleum floor.%-1,4,5,1
+4%1%Kitchen%Warm light, hotter tempers. A chef mutters at a pan that sizzles like rain.%3,-1,6,2
+5%1%Loading Bay%Crates line the concrete; a dolly track points towards a driveway.%-1,-1,-1,3
+6%1%Security Room%Banks of monitors blink with grainy footage; a faint fan hum undercuts the silence. Two feeds are already dark - someone’s tampered with the system.%-1,-1,7,4
+7%1%Main Stairway%Marble steps sweep upward beneath towering portraits; each step sends a soft echo spiraling into the dark above.%-1,-1,-1,6
+8%2%Landing Hall%Plush carpet runner, faint classical music, and the lingering trace of cologne - this landing feels recently traveled.%-1,9,7,10
+9%2%Gallery%Golden frames glitter along velvet walls; pairs of painted eyes follow your hands as you walk.%8,-1,-1,13
+10%2%Study,A quiet study room with a large oak desk contains a locked drawer.%-1,-1,8,-1
+11%2%Private Lounge,Deep chairs placed around a low table set made of crystal; the room smells faintly of smoke and expensive secrets.%-1,12,-1,-1
+12%2%Office%An office with a view! And a wall safe behind some artwork.%11,13,-1,-1
+13%2%East Hall%A long corridor of polished wood and shadowed corners; a draft fingers the candle cups along the wall.%12,-1,9,14
+14%2%Balcony Walkway,Night air presses cool against your skin; stone columns feel cold to the touch.%15,-1,13,16
+15%2%Guest Suite%Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.%-1,14,-1,-1
+16%2%South Stairway%Stone steps tighten into a narrow well; the temperature drops and the air feels damp.%23,-1,-1,14
+17%3%Security Hub%Blinking panels and screens on a wall.%22,-1,18,24
+18%3%Server Closet%The humming sound and heat of server racks fills the room. Status LEDs stutter like a city at night behind glass panels.%-1,-1,-1,17
+19%3%Maintenance Shaft / Closet%Detergent and dust gathered over coils of hose and a dented mop bucket; the walls are close and this space is cramped.%24,-1,-1,-1
+20%3%North Stairway%A sterner stairway in raw concrete and steel - functional and echo-prone if you are in a hurry.%-1,23,21,-1
+21%3%Hall of Wonders%Marvelous contraptions on display pedestals; lights are bright in here.%-1,-1,22,20
+22%3%Camera Room%A desk with two monitors displaying multiple camera feeds; lights are turned off.%-1,17,-1,21
+23%3%South Landing%A small square of carpet and dim lighting; scuffs at the threshold suggest frequent patrol turns.%20,-1,24,-1
+24%3%Armory Annex%Lockers and a bolted workbench; the smell of gun oil sits heavy in the cold, dry air.%-1,19,17,23
+25%4%Observation Room%Telescope by the east window; the starry night is visible outside through the open window; large wooden chest near the telescope.%31,-1,27,-1
+26%4%Vault Corridor West%Floor pressure sensors%-1,-1,30,27
+27%4%Vault Corridor East%A thick steel door stands with biometric pads awaiting a fingerprint to activate.%32,29,26,25
+28%4%Workshop%Tools and papers scattered around on a large table - looks like an unfinished project.%-1,-1,-1,-32
+29%4%Service Loft%Bare rafters and a network of ducts seems to all connect here.%6%27,-1,-1,-1
+30%4%Vault%Polished steel door with multi-step code.%-1,-1,-1,2
+31%4%North Landing%A calm junction washed in cool light; footprints cross and recross the dust in orderly loops.%-1,25,32,-1
+32%4%Security Chamber%Computers beeping; one monitor screen turned on waiting for password input; locked file cabinet.%-1,-1,28,31
