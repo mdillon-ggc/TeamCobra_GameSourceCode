@@ -12,13 +12,6 @@ public class Room
     private String roomDescr;
     private boolean visited;
 
-    private int itemId1;
-    private int itemId2;
-    private int itemId3;
-    private int puzzleId1;
-    private int puzzleId2;
-    private int monsterId1;
-    private int monsterId2;
     private boolean puzzleSolved = false;
     private String defeatedMonsterName;
 
@@ -28,21 +21,12 @@ public class Room
     private Monster monster;
 
     
-    public Room(int roomId, String roomName, String roomDescr,
-                int itemId1, int itemId2, int itemId3, int puzzleId1, int puzzleId2, int monsterId1, int monsterId2) 
+    public Room(int roomId, String roomName, String roomDescr,) 
     {
         this.roomId = roomId;
         this.roomName = roomName;
         this.roomDescr = roomDescr;
         this.visited = false;
-        this.itemId1 = itemId1;
-        this.itemId2 = itemId2;
-        this.itemId3 = itemId3;
-        this.puzzleId1 = puzzleId1;
-        this.puzzleId2 = puzzleId2;
-        this.monsterId1 = monsterId1;
-        this.monsterId2 = monsterId2;
-
         this.exits = new HashMap<>();
         this.items = new ArrayList<>();
     }
@@ -63,41 +47,6 @@ public class Room
     { 
     	return visited; 
     }
-
-    public int getItemId1() 
-    { 
-    	return itemId1; 
-    }
-    
-    public int getItemId2() 
-    { 
-    	return itemId2; 
-    }
-    
-    public int getItemId3() 
-    { 
-    	return itemId3; 
-    }
-    
-    public int getPuzzleId1() 
-    { 
-    	return puzzleId1; 
-    }
-    
-    public int getPuzzleId2() 
-    { 
-    	return puzzleId2; 
-    }
-    
-    public int getMonsterId1() 
-    { 
-    	return monsterId1; 
-    }
-    
-    public int getMonsterId2() 
-    { 
-    	return monsterId2; 
-    }
     
     public String getDefeatedMonsterName() 
     {
@@ -108,41 +57,7 @@ public class Room
     { 
     	this.visited = visited; 
     }
-    public void setItemId1(int itemId) 
-    { 
-    	this.itemId1 = itemId1; 
-    }
-    
-    public void setItemId2(int itemId) 
-    { 
-    	this.itemId2 = itemId2; 
-    }
-    
-    public void setItemId3(int itemId) 
-    { 
-    	this.itemId3 = itemId3; 
-    }
-    
-    public void setPuzzleId1(int puzzleId) 
-    { 
-    	this.puzzleId1 = puzzleId1; 
-    }
-    
-    public void setPuzzleId2(int puzzleId) 
-    { 
-    	this.puzzleId2 = puzzleId2; 
-    }
-    
-    public void setMonsterId1(int monsterId) 
-    { 
-    	this.monsterId1 = monsterId1; 
-    }
-    
-    public void setMonsterId2(int monsterId) 
-    { 
-    	this.monsterId2 = monsterId2; 
-    }
-    
+   
     public void setDefeatedMonsterName(String name) 
     {
         this.defeatedMonsterName = name;
@@ -152,7 +67,6 @@ public class Room
     { 
     	this.roomDescr = descr; 
     }
-
     
     public void trackVisit() 
     {
@@ -289,3 +203,4 @@ public class Room
         }
     }
 }
+
