@@ -5,17 +5,17 @@ public abstract class Item {
     private String itemType;
     private int itemValue;
     private int maxStack;
-    private int roomID;
+
 
     //constructor
-    public Item(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack, int roomID) {
+    public Item(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDesc = itemDesc;
         this.itemType = itemType;
         this.itemValue = itemValue;
         this.maxStack = maxStack;
-        this.roomID = roomID;
+
     }
     //getters
     public int getItemID(){
@@ -42,14 +42,15 @@ public abstract class Item {
         return maxStack;
     }
 
-    public int getRoomID(){
-        return roomID;
+    public boolean isEquipable(){
+        return false;
     }
-
-    //abstract methods
-    public abstract void equip(Item item);
-    public abstract void unequip(Item item);
-    public abstract void useItem(Item item);
+    public boolean isConsumable(){
+        return false;
+    }
+    public boolean isUseable(){
+        return false;
+    }
 
 
 }//end class
