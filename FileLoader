@@ -172,7 +172,7 @@ public class FileLoader
 						//room does not exist
 						else
 						{
-							System.out.println("Room " + puzzleRoomID +
+							System.out.println("Room " + location +
 									" not found for puzzle" + puzzleID);
 						}
 					}
@@ -206,20 +206,26 @@ public class FileLoader
 					{
 						scan2.useDelimiter("%");
 
-						String charID = scan2.next();
-						String charName = scan2.next();
-						String charDesc = scan2.next();
+						String iD = scan2.next();
+						String name = scan2.next();
 						String charType = scan2.next();
-						int charRoomID = scan2.nextInt();
+						String preExisting = scan2.next();
+						String spawn = scan2.next();
+						String monsterDies = scan.next();
+						String playerDies = scan.next();
+						int damage = scan.nextInt();
+						int health = scan.nextInt();
+						String[] location = scan2.next().trim().split(",");
 
-						Character char;
+						Character character;
 
 						switch(charType)
 						{
 							case "NPC" ->
-								char = new NPC(charID, charName, charDesc);
+								character = new NPC(iD, name, preExisting, spawn, monsterDies, playerDies);
 							case "Monster" ->
-								char = new Monster(charID, charName, charDesc);
+								character = new Monster(iD, name, preExisting, spawn, monsterDies,
+										playerDies, damage, health);
 							
 							default ->
 							{
@@ -228,21 +234,22 @@ public class FileLoader
 							}
 						}
 
-						charAL.add(char);
+						charAL.add(character);
 
-						Room room = gameMap.get(charRoomID);
+						
+						Room room = gameMap.get(location);
 
 						//room exists
 						if(room != null)
 						{
-							room.setCharacter(char);
+							room.setCharacter(character);
 						}
 
 						//room does not exist
 						else
 						{
-							System.out.println("Room " + charRoomID +
-									" not found for character" + charID);
+							System.out.println("Room " + location +
+									" not found for character" + iD);
 						}
 					}
 
