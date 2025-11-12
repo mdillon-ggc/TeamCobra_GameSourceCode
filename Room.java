@@ -13,9 +13,9 @@ public class Room
     private boolean visited;
 
     private Map<String, Integer> exits;
-    private List<Item> items;
     private Puzzle puzzle;
-    private Character character;
+    private ArrayList<Item> roomInventory = new ArrayList<>(); 
+    private ArrayList<Character> characterList =new ArrayList<>();
 
     public Room(int roomID, String roomName, String roomDescr) 
     {
@@ -24,7 +24,6 @@ public class Room
         this.roomDescr = roomDescr;
         this.visited = false;
         this.exits = new HashMap<>();
-        this.items = new ArrayList<>();
     }
 
     public int getRoomID() 
@@ -59,7 +58,7 @@ public class Room
 
     public void setCharacter(Character character) 
     {
-        this.character = character;
+        characterList.add(character);
     }
 
     public void trackVisit() 
@@ -103,7 +102,7 @@ public class Room
             this.exits.putAll(exits);
     }
 
-    public List<Item> getItems() 
+    public ArrayList<Item> getItems() 
     {
         return items;
     }
@@ -113,18 +112,9 @@ public class Room
         if (item != null) items.add(item);
     }
 
-    public Item removeItemByName(String itemName) 
+    public boolean removeItem(Item item) 
     {
-        for (Iterator<Item> it = items.iterator(); it.hasNext();) 
-        {
-            Item i = it.next();
-            if (i.getItemName().equalsIgnoreCase(itemName)) 
-            {
-                it.remove();
-                return i;
-            }
-        }
-        return null;
+        return roomInventory.remove(item);
     }
 
     public Puzzle getPuzzle() 
@@ -151,3 +141,4 @@ public class Room
         }
     }
 }
+
