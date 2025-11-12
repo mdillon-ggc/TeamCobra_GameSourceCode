@@ -104,7 +104,7 @@ public class Room
 
     public ArrayList<Item> getItems() 
     {
-        return items;
+        return roomInventory;
     }
 
     public void addItem(Item item) 
@@ -141,4 +141,5 @@ public class Room
         }
     }
 }
+
 
