@@ -44,16 +44,16 @@ public class Puzzle {
     }
 
     // 🔹 Main method for testing
-    public static void main(String[] args) {
-        Puzzle test = new Puzzle("P-01", "Backdoor Keypad", "R01",
-                "You see a keypad by the backdoor...", "5711", 3);
+    // public static void main(String[] args) {
+//     Puzzle test = new Puzzle("P-01", "Backdoor Keypad", "R01",
+//         "You see a keypad by the backdoor...", "5711", 3);
+//     System.out.println("Puzzle ID: " + test.getPuzzleID());
+//     System.out.println("Description: " + test.getDescription());
+//     System.out.println(test.tryAnswer("0800"));
+//     System.out.println(test.tryAnswer("5711"));
+//     System.out.println(test.tryAnswer("5711"));
+// }
 
-        System.out.println("Puzzle ID: " + test.getPuzzleID());
-        System.out.println("Description: " + test.getDescription());
-        System.out.println(test.tryAnswer("0000"));
-        System.out.println(test.tryAnswer("5711"));
-        System.out.println(test.tryAnswer("5711"));
-    }
 }
 
 
