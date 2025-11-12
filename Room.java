@@ -32,10 +32,12 @@ public class Room
     { 
     	return roomID; 
     }
+    
     public String getRoomName() 
     { 
     	return roomName; 
     }
+    
     public String getRoomDescr() 
     { 
     	return roomDescr; 
@@ -72,7 +74,7 @@ public class Room
             System.out.println("You have visited this room.");
         }
 
-        if (puzzle != null && puzzle.isFailed()) 
+        if (puzzle != null && puzzle.isSolved()) 
         {
             puzzle.resetPuzzle();
         }
@@ -80,11 +82,6 @@ public class Room
         if (puzzleSolved) 
         {
             System.out.println("Puzzle is solved in this room.");
-        }
-        
-        if (defeatedMonsterName != null) 
-        {
-            System.out.println("Monster defeated in this room: " + defeatedMonsterName);
         }
     }
 
@@ -151,3 +148,4 @@ public class Room
     }
     
 }
+
