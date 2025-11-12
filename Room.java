@@ -17,8 +17,7 @@ public class Room
     private Puzzle puzzle;
     private Character character;
 
-    
-    public Room(int roomId, String roomName, String roomDescr,) 
+    public Room(int roomID, String roomName, String roomDescr) 
     {
         this.roomID = roomID;
         this.roomName = roomName;
@@ -30,39 +29,39 @@ public class Room
 
     public int getRoomID() 
     { 
-    	return roomID; 
+        return roomID; 
     }
-    
+
     public String getRoomName() 
     { 
-    	return roomName; 
+        return roomName; 
     }
-    
+
     public String getRoomDescr() 
     { 
-    	return roomDescr; 
+        return roomDescr; 
     }
-    
+
     public Character getCharacter() 
     {
         return character;
     }
-    
+
     public boolean isVisited() 
     { 
-    	return visited; 
+        return visited; 
     }
-    
+
     public void setVisited(boolean visited) 
     { 
-    	this.visited = visited; 
+        this.visited = visited; 
     }  
-    
+
     public void setCharacter(Character character) 
     {
         this.character = character;
     }
-    
+
     public void trackVisit() 
     {
         if (!visited) 
@@ -79,10 +78,7 @@ public class Room
             puzzle.resetPuzzle();
         }
 
-        if (puzzleSolved) 
-        {
-            System.out.println("Puzzle is solved in this room.");
-        }
+        System.out.println("Puzzle is solved in this room.");
     }
 
     public void addExit(String direction, int roomID) 
@@ -106,7 +102,6 @@ public class Room
         if (exits != null)
             this.exits.putAll(exits);
     }
-
 
     public List<Item> getItems() 
     {
@@ -146,6 +141,13 @@ public class Room
     {
         return puzzle != null && !puzzle.isSolved();
     }
-    
-}
 
+    // 🔹 
+    public void resetPuzzle()
+    {
+        if (puzzle != null)
+        {
+            puzzle.resetPuzzle();
+        }
+    }
+}
