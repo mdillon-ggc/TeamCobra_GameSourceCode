@@ -12,13 +12,10 @@ public class Room
     private String roomDescr;
     private boolean visited;
 
-    private boolean puzzleSolved = false;
-    private String defeatedMonsterName;
-
     private Map<String, Integer> exits;
     private List<Item> items;
     private Puzzle puzzle;
-    private Character monster;
+    private Character character;
 
     
     public Room(int roomId, String roomName, String roomDescr,) 
@@ -43,29 +40,25 @@ public class Room
     { 
     	return roomDescr; 
     }
+    
+    public Character getCharacter() 
+    {
+        return character;
+    }
+    
     public boolean isVisited() 
     { 
     	return visited; 
     }
     
-    public String getDefeatedMonsterName() 
-    {
-        return defeatedMonsterName;
-    }
-
     public void setVisited(boolean visited) 
     { 
     	this.visited = visited; 
-    }
-   
-    public void setDefeatedMonsterName(String name) 
-    {
-        this.defeatedMonsterName = name;
-    }
+    }  
     
-    public void setRoomDescr(String descr) 
-    { 
-    	this.roomDescr = descr; 
+    public void setCharacter(Character character) 
+    {
+        this.character = character;
     }
     
     public void trackVisit() 
@@ -142,7 +135,6 @@ public class Room
         return null;
     }
 
-
     public Puzzle getPuzzle() 
     {
         return puzzle;
@@ -157,51 +149,5 @@ public class Room
     {
         return puzzle != null && !puzzle.isSolved();
     }
-
-    public void triggerPuzzle() 
-    {
-        if (puzzle == null) return;
-
-        if (puzzle.isSolved()) 
-        {
-            System.out.println("You have already solved this puzzle.");
-            puzzleSolved = true;
-            return;
-        }
-
-        puzzle.start(new Scanner(System.in));
-    }
-
-    public void setPuzzleSolved(boolean solved) 
-    {
-        this.puzzleSolved = solved;
-    }
-
     
-    public Character getMonster() 
-    {
-        return monster;
-    }
-
-    public void setMonster(Character monster) 
-    {
-        this.monster = monster;
-    }
-
-    public void triggerMonster() 
-    {
-        if (monster == null) return;
-
-        if (monster.isDead()) 
-        {
-            System.out.println("Monster defeated: " + monster.getMonsterName());
-        } 
-        else 
-        {
-            System.out.println("Monster here: " + monster.getMonsterName());
-            System.out.println(monster.getMonsterDescr());
-        }
-    }
 }
-
-
