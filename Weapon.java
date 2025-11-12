@@ -2,9 +2,9 @@ public class Weapon extends Item {
     private int dealDamage;
 
     //constructor
-    public Weapon(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack, int roomID, int dealDamage) {
+    public Weapon(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack) {
         super(itemID, itemName, itemDesc, itemType, itemValue, maxStack);
-        this.dealDamage = dealDamage;
+        this.dealDamage = itemValue;
     }
     //getter
     public int getDealDamage(){

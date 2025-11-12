@@ -2,9 +2,9 @@ public class Consumable extends Item{
     private int HP;
 
     //constructor
-    public Consumable(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack, int roomID, int HP) {
+    public Consumable(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack, int HP) {
         super(itemID, itemName, itemDesc, itemType, itemValue, maxStack);
-        this.HP = HP;
+        this.HP = itemValue;
     }
     //getters
     public int getHP() {
