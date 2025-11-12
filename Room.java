@@ -41,9 +41,9 @@ public class Room
         return roomDescr; 
     }
 
-    public Character getCharacter() 
+    public ArrayList<Character> getCharacterList() 
     {
-        return character;
+        return characterList;
     }
 
     public boolean isVisited() 
@@ -141,5 +141,3 @@ public class Room
         }
     }
 }
-
-
