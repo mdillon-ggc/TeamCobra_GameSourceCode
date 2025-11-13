@@ -1,10 +1,11 @@
-P-01%Backdoor Keypad%R01%You see a keypad by the backdoor. The shipping label might have a clue.%5711%3
-P-02%Window Latch%R02%The window is locked. Use your lockpick.%lockpick%3
-P-03%Desk Lock%R10%A desk drawer is locked. You can pick or break it.%crowbar%3
-P-04%Laser Timing%R09%Multiple red lasers move in different directions. Choose a dance: 1. Cha-cha 2. Stayin’ Alive 3. Macarena 4. Cotton Eye Joe.%2%3
-P-05%Wall Safe%R12%A wall safe sits behind a painting. Enter the correct 4-digit code.%1815%3
-P-06%Breaker Routing%R17%An electrical panel hums quietly. Which wire do you cut? (red, green, blue, yellow)%yellow%3
-P-07%Sensor Plate Bypass%R26%A series of pressure plates block your path. Say the magic words.%no more plates%3
-P-08%Biometric Spoof%R27%A fingerprint scanner awaits a valid print. Use your spoofer.%spoofer%3
-P-09%Vault Keypad Step%R30%A keypad asks for a secret code. Use the one from your clue fragment.%9110%3
-P-10%Vault Final Code%R30%Multiple locks guard the vault door. Enter the final phrase.%alpha-9-tango-bravo%3
+P-01%Backdoor Keypad%R01%You see a keypad by the backdoor. The shipping label might have a clue.%5711%PASS: Access granted! The door unlocks and you slip inside.%FAIL: Access denied. The keypad beeps angrily.%5
+P-02%Window Latch%R02%The window is locked. Use your lockpick.%lockpick%PASS: Success! The old window opens and you climb inside.%FAIL: Your lockpick slips and the latch stays shut.%5
+P-03%Desk Lock%R10%A desk drawer is locked. You can pick or break it.%crowbar%PASS: Success! The drawer opens and reveals useful bullets and a clue.%FAIL: The lock resists your attempts. The drawer remains locked.%5
+P-04%Laser Timing%R20%Multiple red lasers move in different directions. Choose a dance: 1. Cha-cha 2. Stayin’ Alive 3. Macarena 4. Cotton Eye Joe.%2%PASS: You time the lasers perfectly and pass through safely.%FAIL: The lasers flash and force you to step back. Try again.%5
+P-05%Wall Safe%R12%A wall safe sits behind a painting. Enter the correct 4-digit code.%1815%PASS: The safe clicks open and you collect important intel.%FAIL: The safe buzzes and the lock stays engaged.%5
+P-06%Breaker Routing%R17%An electrical panel hums quietly. Which wire do you cut? (red, green, blue, yellow)%yellow%PASS: The lights stabilize and the system stays online.%FAIL: Sparks fly from the panel. You quickly pull your hand back.%5
+P-07%Sensor Plate Bypass%R26%A series of pressure plates block your path. Say the magic words.%no more plates%PASS: The plates lock in place and a clear path opens.%FAIL: The plates sink and reset, blocking your way again.%5
+P-08%Biometric Spoof%R27%A fingerprint scanner awaits a valid print. Use your spoofer.%spoofer%PASS: The scanner accepts the spoofed print and the door slides open.%FAIL: The scanner blinks red and rejects your fake print.%5
+P-09%Vault Keypad Step%R30%A keypad asks for a secret code. Use the one from your clue fragment.%9110%PASS: The keypad accepts the code and heavy locks begin to turn.%FAIL: The keypad flashes red and blocks another attempt.%5
+P-10%Vault Final Code%R30%Multiple locks guard the vault door. Enter the final phrase.%alpha-9-tango-bravo%PASS: The vault opens and you finally obtain the rare gemstone.%FAIL: The vault remains sealed, ignoring your incorrect phrase.%5
+
