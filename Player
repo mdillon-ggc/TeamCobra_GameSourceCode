@@ -1,0 +1,29 @@
+import java.util.Map;
+
+public class Player
+{
+	private String currentRoomID;
+	private Map<String, Room> gameMap;
+	
+	public Player(String startingRoomID)
+	{
+		currentRoomID = startingRoomID;
+	}
+	
+	public String getCurrentRoomID()
+	{
+		return currentRoomID;
+	}
+	
+	public void setCurrentRoomID(String roomID)
+	{
+		this.currentRoomID = roomID;
+	}
+
+	public void exploreRoom()
+	{
+		Room currentRoom = gameMap.get(currentRoomID);
+		
+		
+	}
+}
