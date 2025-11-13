@@ -27,21 +27,21 @@ public Character(String id, String name, String charType, String preExisting,
 public String getiD()
   {
   return iD;
-}
+  }
 
 public String getName()
   {
   return name;
-}
+  }
 public String getCharType()
   {
   return charType;
-}
+  }
 
 public String getPreExisting()
   {
   return preExisting;
-}
+  }
 
 public String getSpawn()
   return spawn;
@@ -50,22 +50,22 @@ public String getSpawn()
 public String getMonsterDies()
   {
   return monsterDies;
-}
+  }
 
 public String getPlayerDies()
   {
   return playerDies;
-}
+  }
 
 public int getDamage()
   {
   return damage;
-}
+  }
 
 public int getHealth()
   {
   return health;
-}
+  }
 
 //setters
 public void setName(String name)
