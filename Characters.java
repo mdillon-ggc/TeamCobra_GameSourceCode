@@ -11,7 +11,7 @@ public class Characters{
  
 
 public Character(String id, String name, String charType, String preExisting, 
-  String spawn, String monsterDies, String playerDies, int damage, int health, String location);
+  String spawn, String monsterDies, String playerDies, int damage, int health);
   {
     this.iD = iD;
     this.name = name;
@@ -22,7 +22,6 @@ public Character(String id, String name, String charType, String preExisting,
     this.playerDies = playerDies;
     this.damage = damage;
     this.health = health;
-    this.location = location;
   }
 //getters
 public String getiD()
@@ -66,11 +65,6 @@ public int getDamage()
 public int getHealth()
   {
   return health;
-}
-
-public String getLocation()
-  {
-  return location;
 }
 
 //setters
