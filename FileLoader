@@ -138,61 +138,69 @@ public class FileLoader
 		}
 
 
-		public ArrayList<Puzzle> loadPuzzles(String fileName)
-		{
-			try(Scanner scan = new Scanner(new File(fileName)))
-			{
-				while(scan.hasNextLine())
-				{
-					String line = scan.nextLine().trim();
-					try(Scanner scan2 = new Scanner(line))
-					{
-						scan2.useDelimiter("%");
+	    public ArrayList<Puzzle> loadPuzzles(String fileName)
+    {
+        try (Scanner scan = new Scanner(new File(fileName)))
+        {
+            while (scan.hasNextLine())
+            {
+                String line = scan.nextLine().trim();
 
-						String puzzleID = scan2.next();
-						String name = scan2.next();
-						String location = scan2.next();
-						String description = scan2.next();
-						String answer = scan2.next();
-						int maxAttempts = scan2.nextInt();
+                try (Scanner scan2 = new Scanner(line))
+                {
+                    scan2.useDelimiter("%");
 
-						Puzzle puzzle = new Puzzle(puzzleID, name, location, description,
-								answer, maxAttempts);
+                    String puzzleID    = scan2.next();
+                    String name        = scan2.next();
+                    String location    = scan2.next();
+                    String description = scan2.next();
+                    String answer      = scan2.next();
+                    String passMessage = scan2.next();
+                    String failMessage = scan2.next();
+                    int maxAttempts    = scan2.nextInt();
 
-						puzzleAL.add(puzzle);
+                    Puzzle puzzle = new Puzzle(
+                            puzzleID,
+                            name,
+                            location,
+                            description,
+                            answer,
+                            maxAttempts,
+                            passMessage,
+                            failMessage
+                    );
 
-						Room room = gameMap.get(location);
+                    puzzleAL.add(puzzle);
 
-						//room exists
-						if(room != null)
-						{
-							room.setPuzzle(puzzle);
-						}
+                    Room room = gameMap.get(location);
 
-						//room does not exist
-						else
-						{
-							System.out.println("Room " + location +
-									" not found for puzzle" + puzzleID);
-						}
-					}
+                    // room exists
+                    if (room != null)
+                    {
+                        room.setPuzzle(puzzle);
+                    }
+                    // room does not exist
+                    else
+                    {
+                        System.out.println("Room " + location +
+                                " not found for puzzle " + puzzleID);
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Error parsing line: " + line);
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            System.out.println("Puzzles file not found.");
+            fnfe.printStackTrace();
+        }
 
-					catch(Exception e)
-					{
-						System.out.println("Error parsing line: " + line);
-						e.printStackTrace();
-					}
-				}
-			}
-
-			catch(FileNotFoundException fnfe)
-			{
-				System.out.println("Puzzles file not found.");
-				fnfe.printStackTrace();
-			}
-
-			return puzzleAL;
-		}
+        return puzzleAL;
+    }
 
 
 		public ArrayList<Character> loadChars(String fileName)
