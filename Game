@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Game
+{
+	private Player player;
+	
+	public void playGame()
+	{
+		Scanner scan = new Scanner(System.in);
+		FileLoader loader = new FileLoader();
+		Map<String, Room> roomMap = loader.loadRooms("Room.txt");
+//		ArrayList<ItemInstance> items = loader.parseItemLine("item.txt");
+//		ArrayList<Puzzle> puzzles = loader.loadPuzzles("puzzles.txt");
+//		ArrayList<Character> characters = loader.loadChars("Characters.txt");
+		
+		player = new Player("R05");
+		
+		Room currentRoom = roomMap.get("R05");
+		currentRoom.setVisited(true);
+		
+		System.out.println("Welcome to Master Jewel Thief!");
+		System.out.println("Type 'quit' to exit the game.");
+		System.out.println("Type 'help' to open the help menu.");
+		System.out.println("Type 'read  map' to open the map.\n");
+		
+		
+		while(true)
+		{
+			System.out.println("Enter a command: ");
+			String input = scan.nextLine().trim().toLowerCase();
+			
+			if(input.equals("quit"))
+			{
+				System.out.println("Thanks for playing. Bye!");
+				break;
+			}
+			
+			if(input.equals("help"))
+			{
+				help();
+				continue;
+			}
+			
+			if(input.startsWith("go "))
+			{
+				String direction = input.substring(3).trim();
+				currentRoom = roomMap.get(player.getCurrentRoomID());
+				String nextRoomID = currentRoom.getExit(direction);
+				if(nextRoomID!= null)
+				{
+					player.setCurrentRoomID(nextRoomID);
+					currentRoom = roomMap.get(nextRoomID);
+					System.out.println("Moved " + direction + " to " + nextRoomID);
+					System.out.println(currentRoom.getRoomName());
+					System.out.println(currentRoom.getExits().keySet());
+				}
+				
+				else
+				{
+					System.out.println("invalid command. Try again.");
+				}
+			}
+			
+			if(input.equals("explore"))
+			{
+			
+				player.exploreRoom();
+				continue;
+			}
+		}
+	}
+	
+	public void help()
+	{
+		;
+	}
+	
+	public static void main(String[] args)
+	{
+		Game game = new Game();
+		game.playGame();
+	}
+}
