@@ -68,6 +68,28 @@ public int getHealth()
 }
 
 //setters
+public void setName(String name)
+  {
+  this.name = name;
+  }
+
+  public void setCharType(String charType)
+    {
+    this.charType = charType;
+    }
+
+  public void setPreExisting(String preExisting)
+    {
+      this.preExisting = preExisting;
+    }
+  public void setPlayerDies(String playerDies)
+    { 
+    this.playerDies = player.Dies;
+    }
+  public void setDamage(int damgae)
+    {
+    this.damage = damage;
+    }
  public void setHealth(int health) 
     {
         this.health = health;
@@ -87,4 +109,9 @@ public int getHealth()
     {
         return charType != null && charType.equalsIgnoreCase("Monster");
     }
+  public boolean isAlive()
+    {
+     return isMonster() && health >0;
+  }
 }
+
