@@ -1,19 +1,19 @@
-public ckass Character{
-  private String id;
+public class Characters{
+  private String iD;
   private String name;
-  private String CharType; //Monster or NPC
-  private String PreExisting;  //Text when already in room
-  private String Spawn; // Text when the alart system goes off
-  private String MonsterDies; // Text for defeating the monster
-  private String PlayerDies; // Text for the player dying by monster
-  private int Damage; 
-  private int Health;
-  private String Location; //location format R4 (R+ROOMID)
+  private String charType; //Monster or NPC
+  private String preExisting;  //Text when already in room
+  private String spawn; // Text when the alart system goes off
+  private String monsterDies; // Text for defeating the monster
+  private String playerDies; // Text for the player dying by monster
+  private int damage; 
+  private int health;
+ 
 
-public Character)String id, String name, String charType, String preExisting, 
+public Character(String id, String name, String charType, String preExisting, 
   String spawn, String monsterDies, String playerDies, int damage, int health, String location);
   {
-    this.id = id;
+    this.iD = iD;
     this.name = name;
     this.charType = charType;
     this.preExisting = preExisting;
@@ -25,9 +25,9 @@ public Character)String id, String name, String charType, String preExisting,
     this.location = location;
   }
 //getters
-public String getId()
+public String getiD()
   {
-  return id;
+  return iD;
 }
 
 public String getName()
@@ -79,10 +79,7 @@ public String getLocation()
         this.health = health;
     }
 
-    public void setLocation(String location) 
-    {
-        this.location = location;
-    }
+ 
 
 
 //Checker for NPC + MONSTER
