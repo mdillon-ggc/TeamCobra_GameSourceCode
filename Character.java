@@ -1,4 +1,4 @@
-public class Characters{
+public class Character{
   private String iD;
   private String name;
   private String charType; //Monster or NPC
