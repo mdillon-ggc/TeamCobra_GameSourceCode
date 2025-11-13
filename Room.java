@@ -11,7 +11,7 @@ public class Room
     private String roomDescr;
     private boolean visited;
 
-    private Map<String, Integer> exits;
+    private Map<String, String> exits;
     private Puzzle puzzle;
     private ArrayList<Item> roomInventory = new ArrayList<>(); 
     private ArrayList<Character> characterList =new ArrayList<>();
@@ -87,8 +87,8 @@ public class Room
 
     public void addExit(String direction, int roomID) 
     {
-        if (roomID != -1)
-            exits.put(direction.toUpperCase(), roomID);
+        if (exits != -1)
+            exits.put(direction.toUpperCase(), exits);
     }
 
     public Integer getExit(String direction) 
@@ -96,12 +96,12 @@ public class Room
         return exits.get(direction.toUpperCase());
     }
 
-    public Map<String, Integer> getExits() 
+    public Map<String, String> getExits() 
     {
         return exits;
     }
 
-    public void setExits(Map<String, Integer> exits) 
+    public void setExits(Map<String, String> exits) 
     {
         if (exits != null)
             this.exits.putAll(exits);
@@ -146,5 +146,6 @@ public class Room
         }
     }
 }
+
 
 
