@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+
 
 public class Room 
 {
@@ -109,7 +107,7 @@ public class Room
 
     public void addItem(Item item) 
     {
-        if (item != null) items.add(item);
+        if (item != null) roomInventory.add(item);
     }
 
     public boolean removeItem(Item item) 
@@ -141,3 +139,4 @@ public class Room
         }
     }
 }
+
