@@ -5,7 +5,8 @@ import java.util.Map;
 
 public class Room 
 {
-    private int roomID;
+    private String roomID;
+    private String roomFloorID;
     private String roomName;
     private String roomDescr;
     private boolean visited;
@@ -15,18 +16,24 @@ public class Room
     private ArrayList<Item> roomInventory = new ArrayList<>(); 
     private ArrayList<Character> characterList =new ArrayList<>();
 
-    public Room(int roomID, String roomName, String roomDescr) 
+    public Room(String roomID, String roomFloorID, String roomName, String roomDescr) 
     {
         this.roomID = roomID;
+        this.roomFloorID = roomFloorID;
         this.roomName = roomName;
         this.roomDescr = roomDescr;
         this.visited = false;
         this.exits = new HashMap<>();
     }
 
-    public int getRoomID() 
+    public String getRoomID() 
     { 
         return roomID; 
+    }
+
+    public String getRoomFloorID()
+    {
+        return roomFloorID;
     }
 
     public String getRoomName() 
@@ -139,4 +146,5 @@ public class Room
         }
     }
 }
+
 
