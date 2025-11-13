@@ -1,5 +1,5 @@
 public abstract class Item {
-    private int itemID;
+    private String itemID;
     private String itemName;
     private String itemDesc;
     private String itemType;
@@ -8,7 +8,7 @@ public abstract class Item {
 
 
     //constructor
-    public Item(int itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack) {
+    public Item(String itemID, String itemName, String itemDesc, String itemType, int itemValue, int maxStack) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDesc = itemDesc;
@@ -18,7 +18,7 @@ public abstract class Item {
 
     }
     //getters
-    public int getItemID(){
+    public String getItemID(){
         return itemID;
     }
 
