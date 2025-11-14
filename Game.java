@@ -88,7 +88,7 @@ public class Game
 			{
 				System.out.println("Where would you like to start?: 'window' or 'backdoor'");
 
-				if(input.startsWith("choose"))
+				if(input.startsWith("choose "))
 				{
 					String path = input.substring(7).trim();
 
