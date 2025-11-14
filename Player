@@ -1,11 +1,25 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Player
 {
 	private String currentRoomID;
-	private String previousRoomID; //for flee
+	private String previousRoomID; //for flee 
+//(I don't think this is needed since you aren't going
+//to the prev room but just leaving combat mode? unless
+//their SRS says to.)
 	private Map<String, Room> gameMap;
+	private String playerName;
+	private int playerHP;
+	private int playerDamage;
+	private double detectionLvl;
+	private boolean triggered;
 	private Item equippedItem; // Stores currently equipped item
+	private ArrayList<String> equippedItems = new ArrayList<>(); //could we use this instead?
 	private ArrayList<Item> playerInventory = new ArrayList<>();
 	
 	private int health = 100; //was not mentioned
@@ -19,7 +33,40 @@ public class Player
 	
 	public Player(String playerName, int playerHP, int playerDamage)
 	{
-		// TODO Auto-generated constructor stub
+		this.playerName = playerName;
+		this.playerHP = playerHP;
+		this.playerDamage = playerDamage;
+		this.detectionLvl = 0;
+	}
+
+	public String getPlayerName()
+	{
+		return playerName;
+	}
+
+	public int getPlayerHP()
+	{
+		return playerHP;
+	}
+
+	public int getPlayerDamage()
+	{
+		return playerDamage;
+	}
+
+	public double getDetectionLvl()
+	{
+		return detectionLvl;
+	}
+
+	public boolean getTriggered()
+	{
+		return triggered;
+	}
+
+	public void setTriggered(boolean triggered)
+	{
+		this.triggered = triggered; 
 	}
 
 	public String getCurrentRoomID()
