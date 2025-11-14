@@ -104,6 +104,9 @@ public class Game
 						System.out.println(currentRoom.getExits().keySet());
 						player.startPuzzle;
 
+						System.out.println("Enter a command: ");
+						String direction = scan.nextLine().trim().toLowerCase();
+						player.move(direction);
 						continue;
 					}
 
@@ -118,6 +121,9 @@ public class Game
 						System.out.println(currentRoom.getExits().keySet());
 						player.startPuzzle;
 
+						System.out.println("Enter a command: ");
+						String direction = scan.nextLine().trim().toLowerCase();
+						player.move(direction);
 						continue;
 					}
 
