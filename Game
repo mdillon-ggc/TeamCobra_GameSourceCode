@@ -43,6 +43,11 @@ public class Game
 				continue;
 			}
 			
+			if(roomMap.get(currentRoom) == "R00")
+			{
+				
+			}
+			
 			if(input.startsWith("go "))
 			{
 				String direction = input.substring(3).trim();
@@ -67,6 +72,85 @@ public class Game
 			{
 			
 				player.exploreRoom();
+				continue;
+			}
+			
+			if(input.equals("inventory"))
+			{
+				player.accessInventory();
+				continue;
+			}
+			
+			if(input.startsWith("pickup "))
+			{
+				String item = input.substring(7).trim();
+				player.pickUpItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("drop "))
+			{
+				String item = input.substring(5).trim();
+				player.dropItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("use "))
+			{
+				String item = input.substring(4).trim();
+				player.useItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("inspect "))
+			{
+				String item = input.substring(8).trim();
+				player.inspectItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("equip "))
+			{
+				String item = input.substring(6).trim();
+				player.equipItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("unequip "))
+			{
+				String item = input.substring(8).trim();
+				player.unequipItem(item);
+				continue;
+			}
+			
+			if(input.startsWith("attack "))
+			{
+				String item = input.substring(7).trim();
+				player.attack(); //go to combat mode
+				continue;
+			}
+			
+			if(input.equals("check status"))
+			{
+				player.checkStatus();
+				continue;
+			}
+			
+			if(input.equals("save"))
+			{
+				player.saveGame();
+				continue;
+			}
+			
+			if(input.equals("load"))
+			{
+				player.loadGame();
+				continue;
+			}
+			
+			if(input.equals("read map"))
+			{
+				player.readMap();
 				continue;
 			}
 		}
