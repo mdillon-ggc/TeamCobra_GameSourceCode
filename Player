@@ -5,6 +5,7 @@ public class Player
 	private String currentRoomID;
 	private Map<String, Room> gameMap;
 	private Item equippedItem; // Stores currently equipped item
+	private ArrayList<Item> playerInventory;
 
 	public Player(String startingRoomID)
 	{
@@ -33,8 +34,18 @@ public class Player
 
 	public void accessInventory()
 	{
-		// TODO Auto-generated method stub
-		
+		if (playerInventory.isEmpty())
+		{
+			System.outp.println("Inventory is empty.");
+			return;
+		}
+			for(int i = 0; i < playerInventory.size(); i++)
+			{
+				Item item = playerInventory.get(i);
+
+				System.out.println("Slot " + i + ": " + item.getName()
+				+ " | Quantity: " + item.getQuantity());
+			}
 	}
 
 	public void pickUpItem(String item)
