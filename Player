@@ -10,6 +10,11 @@ public class Player
 		currentRoomID = startingRoomID;
 	}
 	
+	public Player(String playerName, int playerHP, int playerDamage)
+	{
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getCurrentRoomID()
 	{
 		return currentRoomID;
@@ -23,7 +28,79 @@ public class Player
 	public void exploreRoom()
 	{
 		Room currentRoom = gameMap.get(currentRoomID);
-		
+	}
+
+	public void accessInventory()
+	{
+		// TODO Auto-generated method stub
 		
 	}
+
+	public void pickUpItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void dropItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void useItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void inspectItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void equipItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void unequipItem(String item)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void attack()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void checkStatus()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void saveGame()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void loadGame()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void readMap()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
