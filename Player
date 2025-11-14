@@ -117,14 +117,14 @@ public class Player
 
 public void equipItem(String itemName)
 {
-    // 1. Verificar si el inventario está vacío o no existe
+    // Check if the inventory exists and is not empty
     if (playerInventory == null || playerInventory.isEmpty())
     {
         System.out.println("Your inventory is empty.");
         return;
     }
 
-    // 2. Buscar el ítem en el INVENTORY
+    // Search for the item inside the player's inventory
     Item itemToEquip = null;
     for (Item item : playerInventory)
     {
@@ -135,33 +135,42 @@ public void equipItem(String itemName)
         }
     }
 
-    // 3. Si no está en el inventario, no se puede equipar
+    // If the item does not exist in the inventory
     if (itemToEquip == null)
     {
         System.out.println("That item is not in your inventory.");
         return;
     }
 
-    // 4. Verificar que sea equippable (asumiendo que Item tiene isEquippable())
+    // If the item exists but cannot be equipped
     if (!itemToEquip.isEquippable())
     {
-        System.out.println("You can't equip that item.");
+        System.out.println("You cannot equip this item.");
         return;
     }
 
-    // 5. Equipar el ítem
+    // If the player already has an item equipped, unequip it first (optional)
+    if (equippedItem != null)
+    {
+        System.out.println("You unequipped: " + equippedItem.getItemName());
+    }
+
+    // Equip the new item
     equippedItem = itemToEquip;
     System.out.println("You equipped: " + equippedItem.getItemName());
 }
 
+
 public void unequipItem(String itemName)
 {
+    // Check if the player has an equipped item
     if (equippedItem == null)
     {
         System.out.println("You have no item equipped.");
         return;
     }
 
+    // Unequip the currently equipped item
     System.out.println("You unequipped: " + equippedItem.getItemName());
     equippedItem = null;
 }
