@@ -216,13 +216,13 @@ public class Game
 			
 			if(input.equals("save"))
 			{
-				player.saveGame();
+				player.saveGame(input);
 				continue;
 			}
 			
 			if(input.equals("load"))
 			{
-				player.loadGame();
+				player.loadGame(input, characters, items);
 				continue;
 			}
 			
