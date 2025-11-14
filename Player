@@ -117,22 +117,47 @@ public class Player
 
 public void equipItem(String itemName)
 {
-    Room currentRoom = gameMap.get(currentRoomID);
-
-    Item item = currentRoom.getItem(itemName);
-
-    if (item == null) {
-        System.out.println("There is no item with that name here.");
+    // 1. Verificar si el inventario está vacío o no existe
+    if (playerInventory == null || playerInventory.isEmpty())
+    {
+        System.out.println("Your inventory is empty.");
         return;
     }
 
-    equippedItem = item;
-    System.out.println("You equipped: " + item.getItemName());
+    // 2. Buscar el ítem en el INVENTORY
+    Item itemToEquip = null;
+    for (Item item : playerInventory)
+    {
+        if (item.getItemName().equalsIgnoreCase(itemName))
+        {
+            itemToEquip = item;
+            break;
+        }
+    }
+
+    // 3. Si no está en el inventario, no se puede equipar
+    if (itemToEquip == null)
+    {
+        System.out.println("That item is not in your inventory.");
+        return;
+    }
+
+    // 4. Verificar que sea equippable (asumiendo que Item tiene isEquippable())
+    if (!itemToEquip.isEquippable())
+    {
+        System.out.println("You can't equip that item.");
+        return;
+    }
+
+    // 5. Equipar el ítem
+    equippedItem = itemToEquip;
+    System.out.println("You equipped: " + equippedItem.getItemName());
 }
 
 public void unequipItem(String itemName)
 {
-    if (equippedItem == null) {
+    if (equippedItem == null)
+    {
         System.out.println("You have no item equipped.");
         return;
     }
@@ -140,7 +165,6 @@ public void unequipItem(String itemName)
     System.out.println("You unequipped: " + equippedItem.getItemName());
     equippedItem = null;
 }
-
 
 	public void attack(Character monster)
 	{
