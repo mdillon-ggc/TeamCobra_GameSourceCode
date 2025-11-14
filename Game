@@ -125,9 +125,40 @@ public class Game
 			
 			if(input.startsWith("attack "))
 			{
-				String item = input.substring(7).trim();
-				player.attack(); //go to combat mode
+				Character monster = null;
+				for (Character charcter : currentRoom.getCharacterList())
+				{
+					if (character.isMonster() && character.isAlive())
+						{
+							monster = character;
+							break;
+						}
+				}
+
+				if (monster != null)
+				{
+						currentMonster = monster;
+						System.out.println("Combat started with " + monster.getName() + "!");
+						player.attack(currentMonster);
+
+						if (!currentMonster.isAlive())
+						{
+							System.out.println(currentMonster.getMonsterDies());
+							currentRoom.getCharacterList().remove(currentMonster);
+							currentMonster = null;
+						}	
+						else
+						{	
+							monsterCounterAttack();
+						}
+					}
+					else
+					{
+						System.out.println("There is no monster to attack here.");
+					}
 				continue;
+			}
+				
 			}
 			
 			if(input.equals("check status"))
