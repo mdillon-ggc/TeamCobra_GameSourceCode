@@ -10,7 +10,7 @@ public class Room
     private String roomDescr;
     private boolean visited;
 
-    private Map<String, String> exits;
+    private Map<String, String> exits = new HasMap<>();
     private Puzzle puzzle;
     private ArrayList<Item> roomInventory = new ArrayList<>(); 
     private ArrayList<Character> characterList =new ArrayList<>();
@@ -170,3 +170,4 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
+
