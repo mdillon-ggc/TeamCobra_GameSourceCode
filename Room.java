@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Room 
 {
     private String roomID;
@@ -15,6 +14,8 @@ public class Room
     private Puzzle puzzle;
     private ArrayList<Item> roomInventory = new ArrayList<>(); 
     private ArrayList<Character> characterList =new ArrayList<>();
+    private ArrayList<Character> CharacterInRoom = new ArrayList<>();
+	private Character eliteMercernary;
 
     public Room(String roomID, String roomFloorID, String roomName, String roomDescr) 
     {
@@ -85,13 +86,13 @@ public class Room
         System.out.println("Puzzle is solved in this room.");
     }
 
-    public void addExit(String direction, int roomID) 
+    public void addExit(String direction, int exit) 
     {
-        if (exits != -1)
-            exits.put(direction.toUpperCase(), exits);
+        if (exit != -1)
+            exits.put(direction.toUpperCase(), roomID);
     }
 
-    public Integer getExit(String direction) 
+    public String getExit(String direction) 
     {
         return exits.get(direction.toUpperCase());
     }
@@ -137,7 +138,6 @@ public class Room
         return puzzle != null && !puzzle.isSolved();
     }
 
-    // 🔹 
     public void resetPuzzle()
     {
         if (puzzle != null)
@@ -145,7 +145,28 @@ public class Room
             puzzle.resetPuzzle();
         }
     }
+
+    public boolean hasAlert()
+	{
+		return false;
+	}
+	
+	public void checkAlert(Player player)
+	{
+		if(player.getDetectionLvl() >= 3)
+		{
+			if(eliteMercernary != null && !CharacterInRoom.contains(eliteMercernary))
+			{
+				System.out.println(((NPC)eliteMercernary).getAlt());
+				CharacterInRoom.add(eliteMercernary);
+				System.out.println("Alert triggered!" + eliteMercernary.getName() 
+				+ "has appeared!");
+			}
+		}
+	}
+
+	public void setEliteMercernary(Character eliteMerc)
+	{
+		this.eliteMercernary = eliteMerc;
+	}
 }
-
-
-
