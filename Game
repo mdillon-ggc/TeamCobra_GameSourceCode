@@ -198,21 +198,20 @@ public class Game
 						System.out.println("There is no monster to attack here.");
 					}
 				continue;
-			}
-				if (currentMonster != null && input.equals("flee"))
-					{	
-						player.flee();
-						currentRoom = roomMap.get(player.getCurrentRoomID());
-						currentMonster = null;
-						System.out.println("You fled the battle!");
-						continue;
 					}
-				if(input.equals("flee"))
+			if (input.equals("flee")) {
+                if (currentMonster != null) {
+                    player.flee();
+                    currentRoom = roomMap.get(player.getCurrentRoomID());
+                    currentMonster = null;
+                    System.out.println("You fled the battle!");
+                	} 
+						else 
 					{
-					System.out.println("There is nothing to flee from.");
-   					 continue;
-					}
-			}
+                    System.out.println("There is nothing to flee from.");
+                }
+                continue;
+            }
 			
 			if(input.equals("check status"))
 			{
