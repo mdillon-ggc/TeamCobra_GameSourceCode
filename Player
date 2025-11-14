@@ -4,7 +4,8 @@ public class Player
 {
 	private String currentRoomID;
 	private Map<String, Room> gameMap;
-	
+	private Item equippedItem; // Stores currently equipped item
+
 	public Player(String startingRoomID)
 	{
 		currentRoomID = startingRoomID;
@@ -59,18 +60,32 @@ public class Player
 		// TODO Auto-generated method stub
 		
 	}
+public void equipItem(String itemName)
+{
+    Room currentRoom = gameMap.get(currentRoomID);
 
-	public void equipItem(String item)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+    Item item = currentRoom.getItem(itemName);
 
-	public void unequipItem(String item)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+    if (item == null) {
+        System.out.println("There is no item with that name here.");
+        return;
+    }
+
+    equippedItem = item;
+    System.out.println("You equipped: " + item.getItemName());
+}
+
+public void unequipItem(String itemName)
+{
+    if (equippedItem == null) {
+        System.out.println("You have no item equipped.");
+        return;
+    }
+
+    System.out.println("You unequipped: " + equippedItem.getItemName());
+    equippedItem = null;
+}
+
 
 	public void attack()
 	{
