@@ -56,26 +56,65 @@ public class Player
 	public void pickUpItem(String item)
 	{
 		// TODO Auto-generated method stub
-		
-	}
+		Room currentRoom = gameMap.get(currentRoomID);
+        Item itemToPickUp = null;
+    	for (Item itemInRoom : currentRoom.getItems()) {
+	        if (itemInRoom.getItemName().equalsIgnoreCase(item)) {
+	            itemToPickUp = itemInRoom;
+	            break;
+	        }
+    	}
+
+	    if (itemToPickUp != null) {
+	        inventory.add(itemToPickUp);
+	        currentRoom.removeItem(itemToPickUp);
+	        System.out.println("Picked up: " + itemToPickUp.getItemName() + " and added to inventory");
+	    } else {
+	        System.out.println("Item is not found in this room.");
+	    }	
+	}//end pickUpItem method
 
 	public void dropItem(String item)
 	{
 		// TODO Auto-generated method stub
-		
-	}
+		Room currentRoom = gameMap.get(currentRoomID);
+        Item itemToDrop = null;
+		for(Item itemInInv: inventory){
+			if(itemInInv.getItemNam().equalsIgnoreCase(item){
+				itemToDrop = item;
+				break;
+			}
+		}
+		if (itemToDrop != null) {
+	        inventory.remove(itemToDrop);
+	        currentRoom.addItem(itemToDrop);
+	        System.out.println("Dropped: " + itemToDrop.getItemName() + " from this room");
+	    } else {
+	        System.out.println("Item can not be dropped.");
+	    }			
+	}//end dropItem method
 
 	public void useItem(String item)
 	{
 		// TODO Auto-generated method stub
 		
-	}
+		
+	}//end useItem method
 
 	public void inspectItem(String item)
 	{
 		// TODO Auto-generated method stub
-		
-	}
+		Item itemToInspect = null;
+		for(Item itemInInv: inventory){
+			if(itemInInv.getItemName().equalsIgnoreCase(item){
+				ItemtoInspect = itemInInv;
+				System.out.println("Inspecting: " + itemToInspect.getItemName() + ": " + itemToInspect.getItemDesc());
+				return;
+			}
+		}
+	System.out.println("Item is not found in the Inventory");		
+	}//end inspectItem method
+
 public void equipItem(String itemName)
 {
     Room currentRoom = gameMap.get(currentRoomID);
