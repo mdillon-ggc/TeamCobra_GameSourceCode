@@ -87,7 +87,8 @@ public class Game
 			if(currentRoom.getRoomID().equals("R00"))
 			{
 				System.out.println("Where would you like to start?: 'window' or 'backdoor'");
-
+				String input = scan.nextLine().trim().toLowerCase();
+				
 				if(input.startsWith("choose "))
 				{
 					String path = input.substring(7).trim();
@@ -101,6 +102,7 @@ public class Game
 
 						System.out.println(currentRoom.getRoomName());
 						System.out.println(currentRoom.getExits().keySet());
+						player.startPuzzle;
 
 						continue;
 					}
@@ -114,6 +116,7 @@ public class Game
 
 						System.out.println(currentRoom.getRoomName());
 						System.out.println(currentRoom.getExits().keySet());
+						player.startPuzzle;
 
 						continue;
 					}
