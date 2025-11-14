@@ -252,9 +252,9 @@ public void unequipItem(String itemName)
 			System.out.println("There is no monster to attack.");
 			return;
 		}
-	int dmg = getAttackDamage();
+	int dmg = getPlayerDamage();
 	int newHP = Math.max(0, monster.getHealth() - dmg);
-	monster.setHealth(newHO);
+	monster.setHealth(newHP);
 	System.out.println("You attacked " + monster.getName() + " for " + dmg + " damage.");
 
 	if (newHP = 0)
