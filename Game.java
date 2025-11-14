@@ -42,6 +42,47 @@ public class Game
 				help();
 				continue;
 			}
+			// combat mode code
+			 if (currentMonster != null)
+            {
+                // attack while in combat
+                if (input.equals("attack") || input.startsWith("attack "))
+                {
+                    player.attack(currentMonster);
+
+                    if (!currentMonster.isAlive())
+                    {
+                        System.out.println(currentMonster.getMonsterDies());
+                        currentRoom.getCharacterList().remove(currentMonster);
+                        currentMonster = null;
+                    }
+                    else
+                    {
+                        monsterCounterAttack();
+                    }
+                    continue;
+                }
+
+                // flee in combat mode
+                if (input.equals("flee"))
+                {
+                    player.flee();  
+                    currentRoom = roomMap.get(player.getCurrentRoomID());
+                    currentMonster = null;  
+                    System.out.println("You fled the battle!");
+                    continue;
+                }
+
+                // view stats of monster in battle mode
+                if (input.equals("check monster stats"))
+                {
+                    System.out.println("Monster: " + currentMonster.getName());
+                    System.out.println("HP: " + currentMonster.getHealth());
+                    System.out.println("ATK: " + currentMonster.getDamage());
+                    continue;
+                }
+            }
+				
 			
 			if(currentRoom.getRoomID().equals("R00"))
 			{
