@@ -166,13 +166,14 @@ public class Game
 			if(input.startsWith("attack "))
 			{
 				Character monster = null;
-				for (Character charcter : currentRoom.getCharacterList())
-				{
+				for (Character character : currentRoom.getCharacterList())
+   			 {
 					if (character.isMonster() && character.isAlive())
-						{
+      					  	{
+
 							monster = character;
 							break;
-						}
+							}
 				}
 
 				if (monster != null)
@@ -198,6 +199,12 @@ public class Game
 					}
 				continue;
 			}
+				if(inpit.equals("flee"))
+					{	
+						System.out.println("There is nothing to flee from.");
+						contiune;
+					}
+			
 				
 			}
 			
