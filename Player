@@ -96,8 +96,31 @@ public class Player
 
 	public void useItem(String item)
 	{
-		// TODO Auto-generated method stub
-		
+		Item itemToUse = null;
+
+	    // Search for the item in the player's inventory
+	    for (Item invInInv : inventory) {
+	        if (invInInv.getItemName().equalsIgnoreCase(item)) {
+	            itemToUse = invInInv;
+	            break;
+	        }
+	    }
+		if (itemToUse == null) {
+	        System.out.println("You don't have an item named '" + item + "' in your inventory.");
+	        return;
+	    }
+
+		// If it's consumable, remove it after use
+		if (itemToUse.getItemType.equals("consumable"){
+			itemToUse.isConsumable();
+	        inventory.remove(itemToUse);
+	        System.out.println(itemToUse.getItemName() + " has been consumed.");
+			health += itemToUse.getHP;
+	        System.out.println("Current health point is: " + health);
+	    }if else (itemToUse.getItemType.equals("useable"){
+			itemToUse.isUseable();
+			System.out.println(itemToUse.getItemName() + " has been used.");
+		}	
 		
 	}//end useItem method
 
