@@ -6,7 +6,7 @@ public class Player
 	private String previousRoomID; //for flee
 	private Map<String, Room> gameMap;
 	private Item equippedItem; // Stores currently equipped item
-	private ArrayList<Item> playerInventory;
+	private ArrayList<Item> playerInventory = new ArrayList<>();
 	
 	private int health = 100; //was not mentioned
 	private int baseDamage = 10; //was not mentioned 
