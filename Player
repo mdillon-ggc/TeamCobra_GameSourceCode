@@ -266,7 +266,7 @@ public void unequipItem(String itemName)
 	public void takeDamage(int amount)
 	{
 		health = Math.max(0, health - amount);
-		System.out.println("You took " + amount + " damage!);
+		System.out.println("You took " + amount + " damage!");
 	}
 
 	public void flee()
