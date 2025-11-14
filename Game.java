@@ -238,6 +238,30 @@ public class Game
 			}
 		}
 	}
+
+	private void monsterCounterAttack() 
+		{
+        if (currentMonster == null) 
+		{
+            return;
+        }
+        int dmg = currentMonster.getDamage();
+        System.out.println(currentMonster.getName() + " attacks you for " + dmg + " damage!");
+        player.takeDamage(dmg);
+			
+        try {
+            if (player.getPlayerHP() <= 0) 
+			{
+                System.out.println(currentMonster.getPlayerDies());
+                System.out.println("Game Over.");
+                System.exit(0);
+            }
+        }
+		catch (Exception ignored) 
+		{
+			
+        }
+    }
 	
 	public void help()
 	{
