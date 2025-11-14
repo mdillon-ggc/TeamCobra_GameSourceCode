@@ -95,8 +95,8 @@ public class Player
 			{
 				Item item = playerInventory.get(i);
 
-				System.out.println("Slot " + i + ": " + item.getName()
-				+ " | Quantity: " + item.getQuantity());
+				System.out.println("Slot " + i + ": " + item.getItemName()
+				+ " | Quantity: " + item.getCurrentStack());
 			}
 	}
 
