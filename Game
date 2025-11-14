@@ -43,10 +43,50 @@ public class Game
 				continue;
 			}
 			
-			if(roomMap.get(currentRoom) == "R00")
+			if(currentRoom.getRoomID().equals("R00"))
 			{
-				
+				System.out.println("Where would you like to start?: 'window' or 'backdoor'");
+
+				if(input.startsWith("choose"))
+				{
+					String path = input.substring(7).trim();
+
+					if(path.equals("window"))
+					{
+						System.out.println("You climb through the garden window...\n");
+
+						player.setCurrentRoomID("R02");
+						currentRoom = roomMap.get("R02);
+
+						System.out.println(currentRoom.getRoomName());
+						System.out.println(currentRoom.getExits().keySet());
+
+						continue;
+					}
+
+					else if (path.equals("backdoor"))
+					{
+						System.out.println("You slip through the backdoor quietly...\n");
+
+						player.setCurrentRoomID("R01");
+						currentRoom = roomMap.get("R01");
+
+						System.out.println(currentRoom.getRoomName());
+						System.out.println(currentRoom.getExits().keySet());
+
+						continue;
+					}
+
+					else
+					{
+						System.out.println("That path does not exist.");
+						continue;
+					}
+				}
+
+				continue;
 			}
+			
 			
 			if(input.startsWith("go "))
 			{
