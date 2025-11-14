@@ -3,9 +3,14 @@ import java.util.Map;
 public class Player
 {
 	private String currentRoomID;
+	private String previousRoomID; //for flee
 	private Map<String, Room> gameMap;
 	private Item equippedItem; // Stores currently equipped item
 	private ArrayList<Item> playerInventory;
+	
+	private int health = 100; //was not mentioned
+	private int baseDamage = 10; //was not mentioned 
+	private Weapon equippedWeapon;
 
 	public Player(String startingRoomID)
 	{
