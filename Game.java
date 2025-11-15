@@ -185,6 +185,27 @@ public class Game
 				player.attack(monster); //go to combat mode
 				continue;
 			}
+			if (input.startsWith("flee"))
+			{
+				
+				String arg = input.length() > 4 ? input.substring(5).trim() : "";
+
+				if (arg.isEmpty())
+				{
+					System.out.println("Which direction do you want to flee? (N/S/E/W or north/east/south/west)");
+					continue;
+				}
+				
+				String direction = arg.toLowerCase();
+				if (direction.equals("n")) direction = "north";
+				else if (direction.equals("s")) direction = "south";
+				else if (direction.equals("e")) direction = "east";
+				else if (direction.equals("w")) direction = "west";
+
+				player.move(direction, roomMap);
+				currentRoom = roomMap.get(player.getCurrentRoomID());
+				continue;
+			}
 
 			if(input.equals("check status"))
 			{
