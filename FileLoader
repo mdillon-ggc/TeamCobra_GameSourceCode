@@ -7,13 +7,13 @@ import java.util.*;
 
 public class FileLoader
 {
-	private Map<Integer, Room> gameMap = new HashMap<>();
+	private Map<String, Room> gameMap = new HashMap<>();
 	private ArrayList<Item> itemAL = new ArrayList<>();
 	private ArrayList<Puzzle> puzzleAL = new ArrayList<>();
 	private ArrayList<Character> charAL = new ArrayList<>();
 	private ArrayList<Player> playerAL = new ArrayList<>();
 
-	public Map<Integer, Room> loadRooms(String fileName)
+	public Map<String, Room> loadRooms(String fileName)
 	{
 		try(Scanner scan = new Scanner(new File(fileName)))
 		{
@@ -27,22 +27,28 @@ public class FileLoader
 					String roomID = scan2.next();
 					String roomFloorID = scan2.next();
 					String roomName = scan2.next();
-					String roomDesc = scan2.next();
+					String roomDescr = scan2.next();
 					String [] roomExits = scan2.next().split(",");
 
-					Room room = new Room(roomID, roomFloorID, roomName, roomDesc);
+					Room room = new Room(roomID, roomFloorID, roomName, roomDescr);
 
 					//add exits for each room
-					room.addExit("north", Integer.parseInt(roomExits[0]));
-					room.addExit("east", Integer.parseInt(roomExits[1]));
-					room.addExit("south", Integer.parseInt(roomExits[2]));
-					room.addExit("west", Integer.parseInt(roomExits[3]));
+					String[] directions = {"north", "south", "west", "east"};
+
+					for (int i = 0; i < 4; i++) 
+					{
+					    String exitRoomID = roomExits[i].trim();
+					    if (!exitRoomID.equals("-1")) 
+					    { // Only add valid exits
+					        room.addExit(directions[i], exitRoomID);
+					    }
+					}
 
 					//add rooms to game map
 					gameMap.put(roomID, room);
 				}
 
-				catch(exception e)
+				catch(Exception e)
 				{
 					System.out.println("Error parsing line: " + line);
 					e.printStackTrace();
@@ -66,278 +72,326 @@ public class FileLoader
 			while(scan.hasNextLine())
 			{
 				String line = scan.nextLine().trim();
-				try(Scanner scan2 = new Scanner(line))
+				if (line.isEmpty()) continue;
+				try
 				{
-					scan2.useDelimiter("%");
+					String[] parts = line.split("%");
 
-					String itemID = scan2.next();
-					String itemName = scan2.next();
-					String itemDesc = scan2.next();
-					String itemType = scan2.next();
-					int itemValue = scan2.nextInt();
-					String itemRoomID = scan2.next();
-					int maxStack = scan2.hasNextInt() ? scan2.nextInt() : 1;
+			        if (parts.length < 6)
+			        {
+			            System.out.println("Invalid item line: " + line);
+			            continue;
+			        }
+
+					String itemID     = parts[0].trim();
+			        String itemName   = parts[1].trim();
+			        String itemDesc   = parts[2].trim();
+			        String itemType   = parts[3].trim();
+			        int itemValue     = Integer.parseInt(parts[4].trim());
+					int maxStack      = (parts.length > 5 && !parts[5].trim().isEmpty()) ? Integer.parseInt(parts[5].trim()) : 1;
+					String itemRoomID = (parts.length > 6) ? parts[6].trim() : "";
 
 					Item item;
 
 					switch(itemType)
 					{
-						case "Weapon" ->
+						case "weapon" ->
 							item = new Weapon(itemID, itemName, itemDesc, itemValue);
-						case "Consumable" ->
+						case "consumable" ->
 							item = new Consumable(itemID, itemName, itemDesc, itemValue, maxStack);
-						case "Useable" ->
+						case "useable" ->
 							item = new Useable(itemID, itemName, itemDesc, itemValue, maxStack);
 
-						default ->
+							default ->
+							{
+								System.out.println("Unknown item type.");
+								continue;
+							}
+					}
+
+					if(itemRoomID.contains(","))
+					{
+						String [] itemRoomIDs = itemRoomID.split(",");
+						for(String entry : itemRoomIDs)
 						{
-							System.out.println("Unknown item type.");
-							continue;
+							entry = entry.trim();
+							String[] parts2 = entry.split(":");
+							String roomID = parts2[0].trim();
+							int quantity = (parts.length > 1) ? Integer.parseInt(parts2[1]) : 1;
+
+							Room room = gameMap.get(roomID);
+							if(room != null)
+							{
+								Item itemCopy = item.clone();
+								itemCopy.currentStack = quantity;
+								room.addItem(itemCopy);
+								itemAL.add(itemCopy);
+							}
+
+							else
+							{
+								//System.out.println("Room " + roomID + 
+								//"not found for this item" + itemName);
+							}
 						}
 					}
 
-					String [] itemRoomIDs = itemRoomID.split(",");
-					for(String entry : itemRoomIDs)
+					else
 					{
-						entry = entry.trim();
-						String parts = entry.split(",");
-						String roomID = parts.[0].trim();
-						int quantity = (parts.length > 1) ? Integer.parseInt(parts[1]) : 1;
-					
-						Room room = gameMap.get(roomID);
-						if(room != null)
+						Room room = gameMap.get(itemRoomID);
+						if (room != null)
 						{
-							Item itemCopy = item.clone();
-							itemCopy.currentStack = quantity;
-							room.addItem(itemCopy);
-							itemAL.add(itemCopy);
+							room.addItem(item);
+							itemAL.add(item);
 						}
-
-						else
-						{
-							System.out.println("Room " + roomID + 
-								"not found for this item" + itemName);
-						}
-					}
-
-					catch(Exception e)
-					{
-						System.out.println("Error parsing line: " + line);
-						e.printStackTrace();
 					}
 				}
+				catch(Exception e)
+				{
+					System.out.println("Error parsing line: " + line);
+					e.printStackTrace();
+				}
 			}
-
-			catch(FileNotFoundException fnfe)
-			{
-				System.out.println("Items file not found.");
-				fnfe.printStackTrace();
-			}
-
-			return itemAL;
 		}
 
-
-	    public ArrayList<Puzzle> loadPuzzles(String fileName)
-    {
-        try (Scanner scan = new Scanner(new File(fileName)))
-        {
-            while (scan.hasNextLine())
-            {
-                String line = scan.nextLine().trim();
-
-                try (Scanner scan2 = new Scanner(line))
-                {
-                    scan2.useDelimiter("%");
-
-                    String puzzleID    = scan2.next();
-                    String name        = scan2.next();
-                    String location    = scan2.next();
-                    String description = scan2.next();
-                    String answer      = scan2.next();
-                    String passMessage = scan2.next();
-                    String failMessage = scan2.next();
-                    int maxAttempts    = scan2.nextInt();
-
-                    Puzzle puzzle = new Puzzle(
-                            puzzleID,
-                            name,
-                            location,
-                            description,
-                            answer,
-                            maxAttempts,
-                            passMessage,
-                            failMessage
-                    );
-
-                    puzzleAL.add(puzzle);
-
-                    Room room = gameMap.get(location);
-
-                    // room exists
-                    if (room != null)
-                    {
-                        room.setPuzzle(puzzle);
-                    }
-                    // room does not exist
-                    else
-                    {
-                        System.out.println("Room " + location +
-                                " not found for puzzle " + puzzleID);
-                    }
-                }
-                catch (Exception e)
-                {
-                    System.out.println("Error parsing line: " + line);
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            System.out.println("Puzzles file not found.");
-            fnfe.printStackTrace();
-        }
-
-        return puzzleAL;
-    }
-
-
-		public ArrayList<Character> loadChars(String fileName)
+		catch(FileNotFoundException fnfe)
 		{
-			try(Scanner scan = new Scanner(new File(fileName)))
-			{
-				while(scan.hasNextLine())
-				{
-					String line = scan.nextLine().trim();
-					try(Scanner scan2 = new Scanner(line))
-					{
-						scan2.useDelimiter("%");
+			System.out.println("Items file not found.");
+			fnfe.printStackTrace();
+		}
 
-						String iD = scan2.next();
-						String name = scan2.next();
-						String charType = scan2.next();
-						String preExisting = scan2.next();
-						String spawn = scan2.next();
-						String monsterDies = scan.next();
-						String playerDies = scan.next();
-						int damage = scan.nextInt();
-						int health = scan.nextInt();
-						String[] location = scan2.next().trim().split(",");
+		return itemAL;
+	}
+
+
+	public ArrayList<Puzzle> loadPuzzles(String fileName)
+	{
+		try (Scanner scan = new Scanner(new File(fileName)))
+		{
+			while (scan.hasNextLine())
+			{
+				String line = scan.nextLine().trim();
+				if (line.isEmpty()) continue;
+
+				try 
+				{
+					String[] parts = line.split("%");
+					
+					if (parts.length < 6) {
+	                    System.out.println("Invalid puzzle line: " + line);
+	                    continue;
+	                }
+
+					String puzzleID    = parts[0].trim();
+					String name        = parts[1].trim();
+					String location    = parts[2].trim();
+					String description = parts[3].trim();
+					String answer      = parts[4].trim();
+					String passMessage = parts[5].trim();
+					String failMessage = parts[6].trim();
+					int maxAttempts    = Integer.parseInt(parts[7].trim());
+
+					Puzzle puzzle = new Puzzle(
+							puzzleID,
+							name,
+							location,
+							description,
+							answer,
+							maxAttempts,
+							passMessage,
+							failMessage
+							);
+
+					puzzleAL.add(puzzle);
+
+					Room room = gameMap.get(location);
+
+					// room exists
+					if (room != null)
+					{
+						room.setPuzzle(puzzle);
+					}
+					// room does not exist
+					else
+					{
+						System.out.println("Room " + location +
+								" not found for puzzle " + puzzleID);
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println("Error parsing line: " + line);
+					e.printStackTrace();
+				}
+			}
+		}
+		catch (FileNotFoundException fnfe)
+		{
+			System.out.println("Puzzles file not found.");
+			fnfe.printStackTrace();
+		}
+
+		return puzzleAL;
+	}
+
+
+	public ArrayList<Character> loadChars(String fileName)
+	{
+		try(Scanner scan = new Scanner(new File(fileName)))
+		{
+			while(scan.hasNextLine())
+			{
+				String line = scan.nextLine().trim();
+				if (line.isEmpty()) continue;
+
+				try 
+				{
+					String[] parts = line.split("%");
+					
+					if (parts.length < 6) 
+					{
+	                    System.out.println("Invalid character line: " + line);
+	                    continue;
+					}
+
+					String iD = parts[0].trim();
+					String name = parts[1].trim();
+					String charType = parts[2].trim();
+					String preExisting = parts[3].trim();
+					String spawn = parts[4].trim();
+					String monsterDies = parts[5].trim();
+					String playerDies = parts[6].trim();
+					int damage = Integer.parseInt(parts[7].trim());
+					int health = Integer.parseInt(parts[8].trim());
+					String location = parts[9].trim();
 
 						Character character;
 
 						switch(charType)
 						{
-							case "NPC" ->
-								character = new NPC(iD, name, preExisting, spawn, monsterDies, playerDies);
-							case "Monster" ->
-								character = new Monster(iD, name, preExisting, spawn, monsterDies,
-										playerDies, damage, health);
-							
-							default ->
+						case "NPC" ->
+						character = new NPC(iD, name, preExisting, spawn, monsterDies, playerDies);
+						case "Monster" ->
+						character = new Monster(iD, name, preExisting, spawn, monsterDies,
+								playerDies, damage, health);
+
+						default ->
+						{
+							System.out.println("Unknown character type.");
+							continue;
+						}
+						}
+
+						if(location.contains(","))
+						{
+							String [] locationRoomID = location.split(",");
+							for(String entry : locationRoomID)
 							{
-								System.out.println("Unknown character type.");
-								continue;
+								entry = entry.trim();
+								Room room = gameMap.get(entry);
+								if(room != null)
+								{
+									room.setCharacter(character);
+									charAL.add(character);
+								}
+
+								else
+								{
+									//System.out.println("Room " + location + 
+									//"not found for this character" + name);
+								}
 							}
 						}
 
-						charAL.add(character);
-
-						
-						Room room = gameMap.get(location);
-
-						//room exists
-						if(room != null)
-						{
-							room.setCharacter(character);
-						}
-
-						//room does not exist
 						else
 						{
-							System.out.println("Room " + location +
-									" not found for character" + iD);
+							Room room = gameMap.get(location);
+							if (room != null)
+							{
+								room.setCharacter(character);
+								charAL.add(character);
+							}
 						}
 					}
+				
 
-					catch(Exception e)
-					{
-						System.out.println("Error parsing line: " + line);
-						e.printStackTrace();
-					}
-				}
-			}
-
-			catch(FileNotFoundException fnfe)
-			{
-				System.out.println("Characters file not found.");
-				fnfe.printStackTrace();
-			}
-
-			return charAL;
-		}
-
-
-		public ArrayList<Player> loadPlayers(String fileName)
-		{
-			try(Scanner scan = new Scanner(new File(fileName)))
-			{
-				while(scan.hasNextLine())
+				catch(Exception e)
 				{
-					String line = scan.nextLine().trim();
-					try(Scanner scan2 = new Scanner(line))
-					{
-						scan2.useDelimiter("%");
-
-						String playerName = scan2.next();
-						int playerHP = scan2.nextInt();
-						int playerDamage = scan2.nextInt();
-
-						Player player = new Player(playerName, playerHP, playerDamage);
-
-						playerAL.add(player);
-					}
-
-					catch(Exception e)
-					{
-						System.out.println("Error parsing line: " + line);
-						e.printStackTrace();
-					}
+					System.out.println("Error parsing line: " + line);
+					e.printStackTrace();
 				}
 			}
-
-			catch(FileNotFoundException fnfe)
-			{
-				System.out.println("Players file not found.");
-				fnfe.printStackTrace();
-			}
-
-			return playerAL;
 		}
 
-		public Map<Integer, Room> getRoomMap() 
+		catch(FileNotFoundException fnfe)
 		{
-			return gameMap;
+			System.out.println("Characters file not found.");
+			fnfe.printStackTrace();
 		}
 
-		public ArrayList<Item> getItemList() 
-		{
-			return itemAL;
-		}
-
-		public ArrayList<Puzzle> getPuzzleList() 
-		{
-			return puzzleAL;
-		}
-
-		public ArrayList<Character> getCharList() 
-		{
-			return charAL;
-		}
-
-		public ArrayList<Player> getPlayerList() 
-		{
-			return playerAL;
-		}
+		return charAL;
 	}
+
+
+	public ArrayList<Player> loadPlayers(String fileName)
+	{
+		try(Scanner scan = new Scanner(new File(fileName)))
+		{
+			while(scan.hasNextLine())
+			{
+				String line = scan.nextLine().trim();
+				try(Scanner scan2 = new Scanner(line))
+				{
+					scan2.useDelimiter("%");
+
+					String playerName = scan2.next();
+					int playerHP = scan2.nextInt();
+					int playerDamage = scan2.nextInt();
+
+					Player player = new Player(playerName, playerHP, playerDamage);
+
+					playerAL.add(player);
+				}
+
+				catch(Exception e)
+				{
+					System.out.println("Error parsing line: " + line);
+					e.printStackTrace();
+				}
+			}
+		}
+
+		catch(FileNotFoundException fnfe)
+		{
+			System.out.println("Players file not found.");
+			fnfe.printStackTrace();
+		}
+
+		return playerAL;
+	}
+
+	public Map<String, Room> getRoomMap() 
+	{
+		return gameMap;
+	}
+
+	public ArrayList<Item> getItemList() 
+	{
+		return itemAL;
+	}
+
+	public ArrayList<Puzzle> getPuzzleList() 
+	{
+		return puzzleAL;
+	}
+
+	public ArrayList<Character> getCharList() 
+	{
+		return charAL;
+	}
+
+	public ArrayList<Player> getPlayerList() 
+	{
+		return playerAL;
+	}
+}
