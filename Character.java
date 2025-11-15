@@ -11,13 +11,12 @@ public class Character
     private int health;
 
     // Constructor
-    public Character(String id, String charType, String name, String preExisting,
+    public Character(String id, String name, String preExisting,
                      String spawn, String monsterDies, String playerDies,
                      int damage, int health)
     {
         this.iD = id;
         this.name = name;
-        this.charType = charType;
         this.preExisting = preExisting;
         this.spawn = spawn;
         this.monsterDies = monsterDies;
@@ -118,4 +117,10 @@ public class Character
     {
         return isMonster() && health > 0;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName(); // or any property you want to display
+    }
+
 }
