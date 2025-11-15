@@ -258,6 +258,18 @@ public class Player
 		equippedItem = null;
 	}
 
+	// public boolean hasItem(String itemID) 
+	// {
+	//     for (Item item : playerInventory) 
+	//     {
+	//         if (item.getItemID().equalsIgnoreCase(itemID) && item.getCurrentStack() > 0) 
+	//         {
+	//             return true;
+	//         }
+	//     }
+	//     return false;
+	// }
+
 	//monster loses hp
 	public void attack(Character monster)
 	{
