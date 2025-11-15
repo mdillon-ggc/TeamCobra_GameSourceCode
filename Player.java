@@ -12,8 +12,8 @@ public class Player
 	private String currentRoomID;
 	private String previousRoomID; //for flee 
 	private String playerName;
-	private int playerHP;
-	private int playerDamage;
+	private int playerHP = 100;
+	private int playerDamage = 5;
 	private double detectionLvl;
 	private boolean triggered;
 	private Item equippedItem;
@@ -23,6 +23,8 @@ public class Player
 	public Player(String startingRoomID)
 	{
 		currentRoomID = startingRoomID;
+		this.playerHP = 100;
+		this.playerDamage = 5;
 	}
 
 	public Player(String playerName, int playerHP, int playerDamage)
@@ -296,6 +298,7 @@ public class Player
 	{
 		playerHP = Math.max(0, playerHP - amount);
 		System.out.println("You took " + amount + " damage!");
+		System.out.println("Current HP: " + playerHP); 
 	}
 
 	public void flee() // need flee <N|E|S|W>
@@ -312,9 +315,10 @@ public class Player
 	public void checkStatus()
 	{
 		System.out.println("~Player stats~");
-		System.out.println(getPlayerHP());
-		System.out.println(getPlayerDamage());
-		System.out.println(getDetectionLvl());
+		System.out.println("HP: " + playerHP);
+		System.out.println("Attack: " + playerDamage); 
+		System.out.println("Detection: " + detectionLvl);
+		System.out.println("Current Room: " + currentRoomID);
 		System.out.println();
 	}
 
