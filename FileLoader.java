@@ -32,6 +32,18 @@ public class FileLoader
 
 					Room room = new Room(roomID, roomFloorID, roomName, roomDescr);
 
+					// if (roomID.equals("R17") || roomID.equals("R18")) 
+					// {
+					//     room.setLocked(true);
+					//     room.setRequiredKey("A-08");
+					// }
+
+					// if (roomFloorID.equals("F4")) 
+					// {
+					//     room.setLocked(true);
+					//     room.setRequiredKey("A-09");
+					// }
+
 					//add exits for each room
 					String[] directions = {"north", "south", "west", "east"};
 
