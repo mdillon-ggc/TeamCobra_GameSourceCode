@@ -10,7 +10,7 @@ public class Room
     private String roomDescr;
     private boolean visited;
 
-    private Map<String, String> exits = new HasMap<>();
+    private Map<String, String> exits = new HashMap<>();;
     private Puzzle puzzle;
     private ArrayList<Item> roomInventory = new ArrayList<>(); 
     private ArrayList<Character> characterList =new ArrayList<>();
@@ -32,11 +32,11 @@ public class Room
         return roomID; 
     }
 
-    public String getRoomFloorID()
-    {
-        return roomFloorID;
+    public String getRoomFloorID() 
+    { 
+        return roomID; 
     }
-
+    
     public String getRoomName() 
     { 
         return roomName; 
@@ -86,15 +86,17 @@ public class Room
         System.out.println("Puzzle is solved in this room.");
     }
 
-    public void addExit(String direction, int exit) 
+    public void addExit(String direction, String targetRoomID) 
     {
-        if (exit != -1)
-            exits.put(direction.toUpperCase(), roomID);
+        if (targetRoomID != null && !targetRoomID.isEmpty() && !targetRoomID.equals("-1")) 
+        {
+            exits.put(direction.toLowerCase(), targetRoomID);
+        }
     }
 
     public String getExit(String direction) 
     {
-        return exits.get(direction.toUpperCase());
+    	return exits.get(direction.toLowerCase());
     }
 
     public Map<String, String> getExits() 
@@ -146,7 +148,7 @@ public class Room
         }
     }
 
-    public boolean hasAlert()
+	public boolean hasAlert()
 	{
 		return false;
 	}
@@ -170,4 +172,3 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
-
