@@ -32,16 +32,16 @@ public class Room
         characterList =new ArrayList<>();
         characterInRoom = new ArrayList<>();
 
-		if (roomID.equals("R17") || roomID.equals(R18)) 
+		if (roomID.equals("R17") || roomID.equals("R18")) 
    			{
-	            room.setLocked(true);
-                room.setRequiredKey("A-08");
+	            setLocked(true);
+                setRequiredKey("A-08");
 	         }
 
 	    if (roomID.equals("R32")) 
 	         {
-	          room.setLocked(true);
-	          room.setRequiredKey("A-09");
+	          setLocked(true);
+	          setRequiredKey("A-09");
 	        }
 
     }
@@ -239,6 +239,7 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
+
 
 
 
