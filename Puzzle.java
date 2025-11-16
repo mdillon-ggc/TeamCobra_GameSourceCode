@@ -8,14 +8,14 @@ public class Puzzle {
     private final String answer;
     private final int maxAttempts;
 
-    private String passMessage;   // NEW
-    private String failMessage;   // NEW
+    private String passMessage;  
+    private String failMessage;  
 
-    private int attempts;         // now counts DOWN
+    private int attempts;        
     private boolean solved = false;
     private boolean failed = false;
 
-    // Constructor (includes PASS/FAIL messages)
+    // Constructor
     public Puzzle(String puzzleID,
                   String name,
                   String location,
@@ -35,7 +35,7 @@ public class Puzzle {
         this.passMessage = passMessage;
         this.failMessage = failMessage;
 
-        this.attempts = maxAttempts;  // start full: 5 → 4 → 3 → 2 → 1 → 0
+        this.attempts = maxAttempts;
         this.solved = false;
         this.failed = false;
     }
@@ -55,35 +55,35 @@ public class Puzzle {
             return "Already solved.";
         }
 
-        // normalize
         String playerAnswer = input.toLowerCase().trim();
 
-        // Correct answer
         if (playerAnswer.equals(answer)) {
             solved = true;
-            return passMessage;  // Comes from puzzles.txt
+            return passMessage;
         }
 
-        // Wrong answer → subtract attempt
         attempts--;
 
-        // No attempts left
         if (attempts <= 0) {
             failed = true;
             return failMessage + " (No attempts left. Puzzle locked.)";
         }
 
-        // Still available attempts
         return failMessage + " (" + attempts + " attempts left)";
     }
 
-    // Reset puzzle (optional)
+    // Reset puzzle
     public void resetPuzzle() {
         this.attempts = this.maxAttempts;
         this.failed = false;
         this.solved = false;
     }
-}
 
+    // ⭐⭐⭐ THIS IS THE ONLY NEW THING HINA NEEDS ⭐⭐⭐
+    // Start puzzle when player enters the room
+    public void startPuzzle(Player player) {
+        System.out.println("You encounter a puzzle: " + name);
+        System.out.println(description);
+    }
 
-
+}  // ← LAST BRACKET
