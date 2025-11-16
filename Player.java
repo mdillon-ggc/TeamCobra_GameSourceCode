@@ -23,7 +23,7 @@ public class Player
     private ArrayList<Item> equippedItems;
     private HashSet<String> visitedCheckpointRooms;
 
-    // ADDED for puzzle lock
+    // 🔒 NUEVO: modo puzzle
     private boolean inPuzzleMode = false;
 
     public Player(String startingRoomID)
@@ -50,7 +50,7 @@ public class Player
         }
     }
 
-    // ADDED getters/setters for puzzle mode
+    // 🔒 NUEVOS getters/setters para puzzle mode
     public boolean isInPuzzleMode() {
         return inPuzzleMode;
     }
@@ -127,14 +127,16 @@ public class Player
             System.out.println("Inventory is empty.\n");
             return;
         }
-        for(int i = 0; i < playerInventory.size(); i++)
+
+        // mostrar items
+        for (int i = 0; i < playerInventory.size(); i++)
         {
             Item item = playerInventory.get(i);
-
             System.out.println("Slot " + i + ": " + item.getItemName()
                     + " (x" + item.getCurrentStack() + ")");
         }
 
+        // mostrar slots vacíos hasta 8
         for (int i = playerInventory.size(); i < 8; i++) 
         {
             System.out.println("Slot " + i + ": [Empty]");
@@ -617,14 +619,14 @@ public class Player
 
     public void startPuzzle()
     {
-        // ADDED: when a puzzle starts, mark that the player is in puzzle mode
-        inPuzzleMode = true;
+        // This can be used to manually trigger a puzzle if needed
+        // (lo dejo igual que estaba, sin lógica nueva)
     }
 
     public void move(String direction, Map<String, Room> gameMap) {
         direction = direction.toLowerCase();
 
-        // ADDED: block movement while in puzzle mode
+        // 🔒 BLOQUEO: si está en modo puzzle, no puede moverse
         if (inPuzzleMode) {
             System.out.println("You are currently solving a puzzle and cannot leave this room.\n");
             return;
@@ -685,7 +687,6 @@ public class Player
         System.out.println();
 
         // Automatically start puzzle if the room has one
-        // NOTE: adjust method names if your Room/Puzzle classes are different
         if (currentRoom.hasPuzzle()) {
             currentRoom.getPuzzle().startPuzzle(this);
         }
@@ -709,7 +710,9 @@ public class Player
 
     public boolean hasItem(String requiredKeyID)
     {   
+        // lo dejo como estaba
         return playerInventory.contains(requiredKeyID);
     }
 }
+
 
