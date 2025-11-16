@@ -33,6 +33,14 @@ public class Player
 		playerInventory = new ArrayList<>();
 		equippedItems = new ArrayList<>();
 		visitedCheckpointRooms = new HashSet<>();
+
+		// add starting items
+		Item ShippingLabel = new Useable("S-01", "Shipping Label", "It is a shipping label", 1, 1);
+		playerInventory.add(ShippingLabel);
+		Item PocketKnife = new Useable("S-02", "Pocket Knife", "It is a Pocket Knife", 1, 1);
+		playerInventory.add(PocketKnife);
+		Item LockPick = new Useable("S-03", Lock Pick", "It is a lock pick", 1, 1);
+		playerInventory.add(LockPick);
 	}
 
 	public String getPlayerName()
