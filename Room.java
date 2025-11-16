@@ -96,6 +96,18 @@ public class Room
         return false; 
    }
 
+   if (roomID.equals("R18")) 
+   {
+	room.setLocked(true);
+    room.setRequiredKey("A-08");
+	}
+
+	if (roomFloorID.equals("R32")) 
+	{
+	room.setLocked(true);
+	room.setRequiredKey("A-09");
+	}
+
     public boolean isVisited() 
     { 
         return visited; 
@@ -226,4 +238,5 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
+
 
