@@ -118,6 +118,11 @@ public class Character
         return isMonster() && health > 0;
     }
     
+    public boolean canBeAttacked()
+    {
+        return isMonster();  
+    }
+    
     @Override
     public String toString() {
         return this.getName(); // or any property you want to display
