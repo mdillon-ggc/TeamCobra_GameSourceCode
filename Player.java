@@ -190,6 +190,7 @@ public class Player
 			System.out.println(itemFound.getItemName() + " has been consumed.");
 			playerHP += itemToConsume.getHP();
 			System.out.println("Current health point is: " + playerHP);
+			System.out.println();
 		}
 		else if(itemFound.getItemType().equals("useable"))
 		{
@@ -197,12 +198,13 @@ public class Player
 			itemToUse.use(); //call its use() method (which decreases stack and prints message)
 			if(itemToUse.getCurrentStack() <= 0){
 				playerInventory.remove(itemToUse);
-				System.out.println(itemToUse.getItemName() + " has been removed from inventory");
+				System.out.println(itemToUse.getItemName() 
+					+ " has been removed from inventory.\n");
 			}	
 		}	
 		else //unknown type
 		{
-			System.out.println("Item type not valid.");
+			System.out.println("Item type not valid.\n");
 		}
 
 	}//end useItem method
