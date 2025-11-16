@@ -244,7 +244,9 @@ public class Player
             // Use item and decrease stack
             itemToUse.use();
 
-            if(itemToUse.getCurrentStack() <= 0){
+            if(itemToUse.getCurrentStack() <= 0 &&
+              !itemToUse.getItemID().startsWith("A-")) 
+            {
                 playerInventory.remove(itemToUse);
                 System.out.println(itemToUse.getItemName() 
                         + " has been removed from inventory.\n");
