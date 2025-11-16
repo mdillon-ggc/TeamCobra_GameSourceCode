@@ -37,10 +37,11 @@ public class Game
 		}
 
 
-		System.out.println("Welcome to Master Jewel Thief!");
+		System.out.println("Welcome to Master Jewel Thief!\n");
 		System.out.println("Type 'quit' to exit the game.");
 		System.out.println("Type 'help' to open the help menu.");
-		System.out.println("Type 'read  map' to open the map.\n");
+		System.out.println("Type 'read  map' to open the map.");
+		System.out.println("(Above commands only available after initial path chosen)\n");
 
 
 		while(true)
@@ -48,6 +49,7 @@ public class Game
 			if(currentRoom.getRoomID().equals("R00"))
 			{
 				System.out.println("Where would you like to start?: 'window' or 'backdoor'");
+				System.out.println("Type 'Choose <window/backdoor>'");
 				String input = scan.nextLine().trim().toLowerCase();
 
 				if(input.startsWith("choose "))
@@ -178,7 +180,7 @@ public class Game
 
 				if (monster == null)
 				{
-					System.out.println("No monster with that name");
+					System.out.println("No monster with that name.\n");
 					continue;
 				}
 
@@ -219,9 +221,38 @@ public class Game
 				continue;
 			}
 
-			if(input.equals("load "))
+			if(input.startsWith("save"))
 			{
-				String fileName = input.substring(5).trim();
+				String[] parts = input.split(" ", 2);
+				if (parts.length < 2)
+				{
+					System.out.println("Save <filename>");
+					continue;
+				}
+				
+				String fileName = parts[1].replaceAll("[\\\\/:*?\"<>|]", "_") + ".txt";
+				player.saveGame(fileName, roomMap);
+				continue;
+			}
+
+			if (input.equals("load checkpoint")) 
+			{
+				System.out.println("Loading checkpoint...");
+			    player.loadGame("checkpoint.txt", characters, items, roomMap);
+			    continue;
+			}
+			
+			if(input.startsWith("load "))
+			{
+				String[] parts = input.split(" ", 2);
+
+		        if (parts.length < 2) 
+		        {
+		            System.out.println("Load <filename>");
+		            continue;
+		        }
+		        
+				String fileName = parts[1] + ".txt";
 				player.loadGame(fileName, characters, items, roomMap);
 				continue;
 			}
@@ -236,21 +267,26 @@ public class Game
 
 	public void help()
 	{
-		System.out.println("choose <window> or <backdoor>: Decide which path to take initially.");
-		System.out.println("go <direction>: Allows the user to move rooms.");
-		System.out.println("inspect <item>: Allows the user to inspect an artifact/item in order to see its description");
-		System.out.println("pick up <item>: Allows the user to pickup an item.");
-		System.out.println("attack: Allows the user to attack a monster.");
-		System.out.println("save: Allows the user to save.");
-		System.out.println("load: Allows the user to load.");
-		System.out.println("inventory: Open the inventory.");
-		System.out.println("quit: Allows the user to quit/exit");
-		System.out.println("use <item>: Allows the user to use whatever inventory &  artifacts and tools they have.");
-		System.out.println("equip <weapon>: Allows the user to equip a weapon, which will be used for attacks");
-		System.out.println("explore: Allows the player to view the room snapshot (room description, npcs, monsters, artifacts, etc.)");
-		System.out.println("drop <item>: Allows the player to drop an item from their inventory.");
-		System.out.println("status: Allows the player to view their detection level");
-		System.out.println("flee <N|S|E|W: Allows the player to flee to the previous room. If no direction is provided with flee command, the player flees to the previous room they were in.\n");
+		System.out.println("\n------------------------Help Menu---------------------------");
+		System.out.println(" quit                        | Exit game");
+		System.out.println(" help                        | Open help menu");
+		System.out.println(" read map                    | Open a pop-up map of game for each floor");
+		System.out.println(" go <direction>              | Navigate rooms");
+		System.out.println(" explore                     | View the room details");
+		System.out.println(" check status                | View player statistics");
+		System.out.println(" inventory                   | Open player inventory");
+		System.out.println(" pick up <item>              | Pick up an item in the room");
+		System.out.println(" inspect <item>              | Get item details from inventory items");
+		System.out.println(" use <item>                  | Use/consume item in inventory");
+		System.out.println(" drop <item>                 | Remove an item from player inventory into the room");
+		System.out.println(" equip <weapon>              | Equip a weapon from player inventory");
+		System.out.println(" unequip <weapon>            | Unequip a weapon from player inventory");
+		System.out.println(" attack <monster>            | Enter combat mode and attack a monster");
+		System.out.println(" save <filename>             | Save the game progress");
+		System.out.println(" load <filename>             | Load a saved file");
+		System.out.println(" load checkpoint             | Load a saved checkpoint file");
+		System.out.println(" flee                        | Player flees to the previous room");
+		System.out.println(" flee <N|S|E|W>              | Flee north, south, east, or west\n");
 	}
 
 	public static void main(String[] args)
