@@ -9,12 +9,13 @@ public class Room
     private String roomName;
     private String roomDescr;
     private boolean visited;
+	private boolean isCheckpoint = false; // default false
 
-    private Map<String, String> exits = new HashMap<>();;
+    private Map<String, String> exits;
     private Puzzle puzzle;
-    private ArrayList<Item> roomInventory = new ArrayList<>(); 
-    private ArrayList<Character> characterList =new ArrayList<>();
-    private ArrayList<Character> CharacterInRoom = new ArrayList<>();
+    private ArrayList<Item> roomInventory; 
+    private ArrayList<Character> characterList;
+    private ArrayList<Character> characterInRoom;
 	private Character eliteMercernary;
 
     public Room(String roomID, String roomFloorID, String roomName, String roomDescr) 
@@ -25,6 +26,9 @@ public class Room
         this.roomDescr = roomDescr;
         this.visited = false;
         this.exits = new HashMap<>();
+        roomInventory = new ArrayList<>();
+        characterList =new ArrayList<>();
+        characterInRoom = new ArrayList<>();
     }
 
     public String getRoomID() 
@@ -34,7 +38,7 @@ public class Room
 
     public String getRoomFloorID() 
     { 
-        return roomID; 
+        return roomFloorID; 
     }
     
     public String getRoomName() 
@@ -67,6 +71,16 @@ public class Room
         characterList.add(character);
     }
 
+	public void setCheckpoint(boolean checkpoint) 
+	{
+        this.isCheckpoint = checkpoint;
+    }
+
+    public boolean isCheckpoint() 
+	{
+        return isCheckpoint;
+    }
+
     public void trackVisit() 
     {
         if (!visited) 
@@ -75,7 +89,7 @@ public class Room
         } 
         else 
         {
-            System.out.println("You have visited this room.");
+            System.out.println("You have visited this room.\n");
         }
 
         if (puzzle != null && puzzle.isSolved()) 
@@ -83,7 +97,7 @@ public class Room
             puzzle.resetPuzzle();
         }
 
-        System.out.println("Puzzle is solved in this room.");
+        System.out.println("Puzzle is solved in this room.\n");
     }
 
     public void addExit(String direction, String targetRoomID) 
@@ -162,7 +176,7 @@ public class Room
 				System.out.println(((NPC)eliteMercernary).getAlt());
 				CharacterInRoom.add(eliteMercernary);
 				System.out.println("Alert triggered!" + eliteMercernary.getName() 
-				+ "has appeared!");
+				+ "has appeared!\n");
 			}
 		}
 	}
@@ -172,6 +186,3 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
-
-
-
