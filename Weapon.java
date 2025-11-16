@@ -5,6 +5,7 @@ public class Weapon extends Item {
     public Weapon(String itemID, String itemName, String itemDesc, int itemValue) {
         super(itemID, itemName, itemDesc, itemValue, 1); //weapons not stackable
         this.dealDamage = itemValue;
+        this.itemType = "weapon"; ////////// ✅ Set itemType
     }
     //getter
     public int getDealDamage(){
@@ -16,3 +17,4 @@ public class Weapon extends Item {
     }
 
 }
+
