@@ -580,7 +580,7 @@ public class Player
 		// This can be used to manually trigger a puzzle if needed
 	}
 
-	public void move(String direction, Map<String, Room> roomMap) {
+	public void move(String direction, Map<String, Room> gameMap) {
 		direction = direction.toLowerCase();
 
 		// Check if the current room has an exit in that direction
