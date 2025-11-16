@@ -67,7 +67,7 @@ public class Game
 			                System.out.println("You slip through the backdoor quietly...\n");
 			                break;
 			            default:
-			                System.out.println("That path does not exist.");
+			                System.out.println("That path does not exist.\n");
 			                continue;
 			        }
 
@@ -80,6 +80,7 @@ public class Game
 			        System.out.println(currentRoom.getRoomName());
 			        System.out.println(currentRoom.getRoomDescr());
 			        System.out.println("Exits: " + currentRoom.getExits().keySet());
+					System.out.println();
 
 			        if (currentRoom.hasPuzzle()) {
 						currentRoom.getPuzzle().startPuzzle(player);
@@ -197,7 +198,8 @@ public class Game
 
 				if (arg.isEmpty())
 				{
-					System.out.println("Which direction do you want to flee? (N/S/E/W or north/east/south/west)");
+					System.out.println("Which direction do you want to flee?"
+							+ "(N/S/E/W or north/east/south/west)");
 					continue;
 				}
 				
@@ -215,12 +217,6 @@ public class Game
 			if(input.equals("check status"))
 			{
 				player.checkStatus();
-				continue;
-			}
-
-			if(input.equals("save"))
-			{
-				player.saveGame(input, roomMap);
 				continue;
 			}
 
