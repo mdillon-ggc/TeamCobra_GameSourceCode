@@ -329,27 +329,36 @@ public class Player
 		System.out.println("Detection level increased to: " + detectionLvl);
 	}
 
-	//monster loses hp
-	public void attack(Character monster)
-	{
-		// Do not attack if target is null, not a monster, or already dead
-		if (monster == null || !monster.isMonster() || !monster.isAlive())
-		{
-			System.out.println("You cannot attack that.");
-			return;
-		}
-		int dmg = getPlayerDamage();
-		int newHP = Math.max(0, monster.getHealth() - dmg);
-		monster.setHealth(newHP);
-		System.out.println("You attacked " + monster.getName() + " for " + dmg + " damage.");
+	public void attack(Character target) 
+{
+    if (target == null)
+    {
+        System.out.println("There is nothing to attack.");
+        return;
+    }
 
-		if (newHP <= 0)
-		{
-			System.out.println(monster.getMonsterDies());
-			//remove monster after dead
-		}	
+    if (!target.canBeAttacked()) //to prevent npc getting attacked 
+    {
+        System.out.println("You cannot attack " + target.getName() + ". They are not hostile.");
+        return;
+    }
+	
+    if (!target.isAlive())
+    {
+        System.out.println(target.getName() + " is already defeated.");
+        return;
+    }
+	
+    int dmg = getPlayerDamage();                    
+    int newHP = Math.max(0, target.getHealth() - dmg);
+    target.setHealth(newHP);
+    System.out.println("You attacked " + target.getName() + " for " + dmg + " damage.");
+    if (newHP <= 0)
+    {
+        System.out.println(target.getMonsterDies());   
+    }
+}
 
-	}
 
 	//player loses hp
 	public void takeDamage(int amount)
