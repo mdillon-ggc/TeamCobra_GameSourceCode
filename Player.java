@@ -111,7 +111,7 @@ public class Player
 
 	public void pickUpItem(String item, Map <String, Room> gameMap)
 	{
-		// TODO Auto-generated method stub
+		// Search for the item in the current room and add it to inventory
 		Room currentRoom = gameMap.get(currentRoomID);
 		Item itemToPickUp = null;
 		for (Item itemInRoom : currentRoom.getItems()) {
@@ -131,7 +131,7 @@ public class Player
 
 	public void dropItem(String item, Map <String, Room> gameMap)
 	{
-		// TODO Auto-generated method stub
+		// Drop an item from inventory into the current room
 		Room currentRoom = gameMap.get(currentRoomID);
 		Item itemToDrop = null;
 		for(Item itemInInv: playerInventory){
@@ -188,7 +188,7 @@ public class Player
 
 	public void inspectItem(String item)
 	{
-		// TODO Auto-generated method stub
+		// Inspect an item in the inventory
 		Item itemToInspect = null;
 		for(Item itemInInv: playerInventory){
 			if(itemInInv.getItemName().equalsIgnoreCase(item)){
@@ -235,7 +235,7 @@ public class Player
 			return;
 		}
 
-		// If the player already has an item equipped, unequip it first (optional)
+		// If the player already has an item equipped, unequip it first
 		if (equippedItem != null)
 		{
 			System.out.println("You unequipped: " + equippedItem.getItemName());
@@ -260,24 +260,23 @@ public class Player
 		equippedItem = null;
 	}
 
-	// public boolean hasItem(String itemID) 
-	// {
-	//     for (Item item : playerInventory) 
-	//     {
-	//         if (item.getItemID().equalsIgnoreCase(itemID) && item.getCurrentStack() > 0) 
-	//         {
-	//             return true;
-	//         }
-	//     }
-	//     return false;
-	// }
+	// Method to increase detection level (for puzzles/items that affect detection)
+	public void increaseDetectionLvl(double amount)
+	{
+		// Increase the detection level by the given amount
+		detectionLvl += amount;
+
+		// Optional: show the new detection level
+		System.out.println("Detection level increased to: " + detectionLvl);
+	}
 
 	//monster loses hp
 	public void attack(Character monster)
 	{
-		if (monster == null && !monster.isMonster() && !monster.isAlive())
+		// Do not attack if target is null, not a monster, or already dead
+		if (monster == null || !monster.isMonster() || !monster.isAlive())
 		{
-			System.out.println("There is no monster to attack.");
+			System.out.println("You cannot attack that.");
 			return;
 		}
 		int dmg = getPlayerDamage();
@@ -494,7 +493,7 @@ public class Player
 	public void startPuzzle()
 	{
 		// TODO Auto-generated method stub
-
+		// This can be used to manually trigger a puzzle if needed
 	}
 
 	public void move(String direction, Map<String, Room> roomMap) {
@@ -513,16 +512,17 @@ public class Player
 			return;
 		}
 
-// 		Room nextRoom = roomMap.get(nextRoomID);
-		
+		// Get the next room from the room map
+		Room nextRoom = roomMap.get(nextRoomID);
+
 // 		if (nextRoom.isLocked()) 
 // 		{
-//     if (!nextRoom.unlockRoom(this)) 
-// 	{   
-//         System.out.println("The door is locked.");
-//         return;  
-//     }
-// }
+//     		if (!nextRoom.unlockRoom(this)) 
+// 			{   
+//         		System.out.println("The door is locked.");
+//         		return;  
+//     		}
+// 		}
 
 		if (nextRoom == null) {
 			System.out.println("That room does not exist.");
@@ -541,6 +541,11 @@ public class Player
 		// Display room info
 		System.out.println(currentRoom.getRoomName());
 		System.out.println("Exits: " + currentRoom.getExits().keySet());
+
+		// Automatically start puzzle if the room has one
+		// NOTE: adjust method names if your Room/Puzzle classes are different
+		if (currentRoom.hasPuzzle()) {
+			currentRoom.getPuzzle().startPuzzle(this);
+		}
 	}
 }
-
