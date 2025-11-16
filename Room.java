@@ -16,8 +16,6 @@ public class Room
     private ArrayList<Character> characterList =new ArrayList<>();
     private ArrayList<Character> CharacterInRoom = new ArrayList<>();
 	private Character eliteMercernary;
-	// private boolean locked = false;
-	// private String requiredKeyID = null;
 
     public Room(String roomID, String roomFloorID, String roomName, String roomDescr) 
     {
@@ -68,44 +66,6 @@ public class Room
     {
         characterList.add(character);
     }
-
-// 	public boolean isLocked() 
-// 	{
-//     return locked;
-// 	}
-
-// 	public void setLocked(boolean locked) 
-// 	{
-//     this.locked = locked;
-// 	}
-
-// 	public void setRequiredKey(String keyID) 
-// 	{
-//     this.requiredKeyID = keyID;
-// 	}
-
-// 	public String getRequiredKey() 
-// 	{
-//     return requiredKeyID;
-// 	}
-
-// 	public boolean unlockRoom(Player player) 
-// 	{
-//     if (requiredKeyID == null) 
-// 	{
-//         locked = false;
-//         return true;
-//     }
-
-// 	if (player.hasItem(requiredKeyID)) 
-// 	{
-//         locked = false;
-//         System.out.println("requiredKeyID " + " used to unlock door.");
-//         return true;
-//     }
-
-//     return false; 
-// }
 
     public void trackVisit() 
     {
@@ -212,5 +172,6 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
+
 
 
