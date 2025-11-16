@@ -11,7 +11,6 @@ public class FileLoader
 	private ArrayList<Item> itemAL = new ArrayList<>();
 	private ArrayList<Puzzle> puzzleAL = new ArrayList<>();
 	private ArrayList<Character> charAL = new ArrayList<>();
-	private ArrayList<Player> playerAL = new ArrayList<>();
 
 	public Map<String, Room> loadRooms(String fileName)
 	{
@@ -20,25 +19,27 @@ public class FileLoader
 			while(scan.hasNextLine())
 			{
 				String line = scan.nextLine().trim();
-				try(Scanner scan2 = new Scanner(line))
+				try
 				{
-					scan2.useDelimiter("%");
+					String[] parts = line.split("%");
+					String roomID = parts[0];
+					String roomFloorID = parts[1];
+					String roomName = parts[2];
+					String roomDescr = parts[3];
+					String roomExits = parts[4];
+					boolean isCheckpoint = parts.length > 5 && parts[5].equals("1");
 
-					String roomID = scan2.next();
-					String roomFloorID = scan2.next();
-					String roomName = scan2.next();
-					String roomDescr = scan2.next();
-					String [] roomExits = scan2.next().split(",");
-
+					
 					Room room = new Room(roomID, roomFloorID, roomName, roomDescr);
-
-
+					room.setCheckpoint(isCheckpoint);
+					
 					//add exits for each room
+					String[] exitIDs = roomExits.split(",");
 					String[] directions = {"north", "south", "west", "east"};
 
 					for (int i = 0; i < 4; i++) 
 					{
-					    String exitRoomID = roomExits[i].trim();
+					    String exitRoomID = exitIDs[i].trim();
 					    if (!exitRoomID.equals("-1")) 
 					    { // Only add valid exits
 					        room.addExit(directions[i], exitRoomID);
@@ -89,7 +90,8 @@ public class FileLoader
 			        String itemDesc   = parts[2].trim();
 			        String itemType   = parts[3].trim();
 			        int itemValue     = Integer.parseInt(parts[4].trim());
-					int maxStack      = (parts.length > 5 && !parts[5].trim().isEmpty()) ? Integer.parseInt(parts[5].trim()) : 1;
+					int maxStack      = (parts.length > 5 && !parts[5].trim().isEmpty()) ?
+							Integer.parseInt(parts[5].trim()) : 1;
 					String itemRoomID = (parts.length > 6) ? parts[6].trim() : "";
 
 					Item item;
@@ -333,44 +335,6 @@ public class FileLoader
 		return charAL;
 	}
 
-
-	public ArrayList<Player> loadPlayers(String fileName)
-	{
-		try(Scanner scan = new Scanner(new File(fileName)))
-		{
-			while(scan.hasNextLine())
-			{
-				String line = scan.nextLine().trim();
-				try(Scanner scan2 = new Scanner(line))
-				{
-					scan2.useDelimiter("%");
-
-					String playerName = scan2.next();
-					int playerHP = scan2.nextInt();
-					int playerDamage = scan2.nextInt();
-
-					Player player = new Player(playerName, playerHP, playerDamage);
-
-					playerAL.add(player);
-				}
-
-				catch(Exception e)
-				{
-					System.out.println("Error parsing line: " + line);
-					e.printStackTrace();
-				}
-			}
-		}
-
-		catch(FileNotFoundException fnfe)
-		{
-			System.out.println("Players file not found.");
-			fnfe.printStackTrace();
-		}
-
-		return playerAL;
-	}
-
 	public Map<String, Room> getRoomMap() 
 	{
 		return gameMap;
@@ -389,10 +353,5 @@ public class FileLoader
 	public ArrayList<Character> getCharList() 
 	{
 		return charAL;
-	}
-
-	public ArrayList<Player> getPlayerList() 
-	{
-		return playerAL;
 	}
 }
