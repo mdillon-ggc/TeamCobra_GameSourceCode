@@ -176,47 +176,70 @@ public class Player
 		}			
 	}//end dropItem method
 
-	public void useItem(String item)
+	public void useItem(String item, Map<String, Room> gameMap)
 	{
-		Item itemFound = null;
+	    Item itemFound = null;
 
-		// Search for the item in the player's inventory
-		for (Item invInInv : playerInventory) {
-			if (invInInv.getItemName().equalsIgnoreCase(item)) {
-				itemFound = invInInv;
-				break;
-			}
-		}
-		if (itemFound == null) {
-			System.out.println("You don't have an item named '" + 
-				item + "' in your inventory.\n");
-			return;
-		}
+	    for (Item invInInv : playerInventory) {
+	        if (invInInv.getItemName().equalsIgnoreCase(item)) {
+	            itemFound = invInInv;
+	            break;
+	        }
+	    }
 
-		// If it's consumable, remove it after use
-		if (itemFound.getItemType().equals("consumable"))
-		{
-			Consumable itemToConsume = (Consumable) itemFound;
-			playerInventory.remove(itemFound);
-			System.out.println(itemFound.getItemName() + " has been consumed.");
-			playerHP += itemToConsume.getHP();
-			System.out.println("Current health point is: " + playerHP);
-			System.out.println();
-		}
-		else if(itemFound.getItemType().equals("useable"))
-		{
-			Useable itemToUse = (Useable) itemFound;
-			itemToUse.use(); //call its use() method (which decreases stack and prints message)
-			if(itemToUse.getCurrentStack() <= 0){
-				playerInventory.remove(itemToUse);
-				System.out.println(itemToUse.getItemName() 
-					+ " has been removed from inventory.\n");
-			}	
-		}	
-		else //unknown type
-		{
-			System.out.println("Item type not valid.\n");
-		}
+	    if (itemFound == null) {
+	        System.out.println("You don't have an item named '" + item + "' in your inventory.\n");
+	        return;
+	    }
+
+	    String type = itemFound.getItemType();
+
+	    if (type.equals("consumable"))
+	    {
+	        Consumable itemToConsume = (Consumable) itemFound;
+	        playerInventory.remove(itemFound);
+	        System.out.println(itemFound.getItemName() + " has been consumed.");
+	        playerHP += itemToConsume.getHP();
+	        System.out.println("Current health point is: " + playerHP);
+	        System.out.println();
+	    }
+	    else if(type.equals("useable"))
+	    {
+	        Useable itemToUse = (Useable) itemFound;
+
+	        // ==== UNLOCK ROOMS BEFORE REMOVING THE KEY ====
+	        Room current = this.getCurrentRoom();
+
+	        for (String direction : current.getExits().keySet())
+	        {
+	            String nextRoomID = current.getExits().get(direction);
+	            Room nextRoom = gameMap.get(nextRoomID);
+
+	            if (nextRoom != null && nextRoom.isLocked())
+	            {
+	                if (itemFound.getItemID().equalsIgnoreCase(nextRoom.getRequiredKey()))
+	                {
+	                    nextRoom.setLocked(false);
+	                    System.out.println("You used " + itemFound.getItemName()
+	                            + " to unlock " + nextRoom.getRoomName() + "!");
+	                }
+	            }
+	        }
+
+	        // Use item and decrease stack
+	        itemToUse.use();
+
+	        if(itemToUse.getCurrentStack() <= 0){
+	            playerInventory.remove(itemToUse);
+	            System.out.println(itemToUse.getItemName() 
+	                    + " has been removed from inventory.\n");
+	        }
+	    }
+	    else
+	    {
+	        System.out.println("Item type not valid.\n");
+	    }
+	}
 
 	}//end useItem method
 
