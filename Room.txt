@@ -5,7 +5,7 @@ R03%F1%Service Corridor%Bleach stings your nose. Cardboard towers lean over the 
 R04%F1%Kitchen%Warm light, hotter tempers. A chef mutters at a pan that sizzles like rain.%R03,-1,R06,R02
 R05%F1%Loading Bay%Crates line the concrete; a dolly track points towards a driveway.%-1,-1,-1,R03
 R06%F1%Security Room%Banks of monitors blink with grainy footage; a faint fan hum undercuts the silence. Two feeds are already dark - someone’s tampered with the system.%-1,-1,R07,R04
-R07%F1%Main Stairway%Marble steps sweep upward beneath towering portraits; each step sends a soft echo spiraling into the dark above.%R08,-1,-1,R06
+R07%F1%Main Stairway%Marble steps sweep upward beneath towering portraits; each step sends a soft echo spiraling into the dark above.%R08,-1,-1,R06//changed from -1 to R08
 R08%F2%Landing Hall%Plush carpet runner, faint classical music, and the lingering trace of cologne - this landing feels recently traveled.%-1,R09,R07,R10
 R09%F2%Gallery%Golden frames glitter along velvet walls; pairs of painted eyes follow your hands as you walk.%R08,-1,-1,R13
 R10%F2%Study%A quiet study room with a large oak desk contains a locked drawer.%-1,-1,R08,-1
@@ -13,7 +13,7 @@ R11%F2%Private Lounge%Deep chairs placed around a low table set made of crystal;
 R12%F2%Office%An office with a view! And a wall safe behind some artwork.%R11,R13,-1,-1
 R13%F2%East Hall%A long corridor of polished wood and shadowed corners; a draft fingers the candle cups along the wall.%R12,-1,R09,R14
 R14%F2%Balcony Walkway%Night air presses cool against your skin; stone columns feel cold to the touch.%R15,-1,R13,R16
-R15%F2%Guest Suite%Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.%-1,R18,-1,-1
+R15%F2%Guest Suite%Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.%-1,R18,-1,-1//changed from -1 to R18
 R16%F2%South Stairway%Stone steps tighten into a narrow well; the temperature drops and the air feels damp.%R23,-1,-1,R14
 R17%F3%Security Hub%Blinking panels and screens on a wall.%R22,-1,R18,R24
 R18%F3%Server Closet%The humming sound and heat of server racks fills the room. Status LEDs stutter like a city at night behind glass panels.%-1,-1,-1,R17
@@ -31,5 +31,6 @@ R29%F4%Service Loft%Bare rafters and a network of ducts seems to all connect her
 R30%F4%Vault%Polished steel door with multi-step code.%-1,-1,-1,R02
 R31%F4%North Landing%A calm junction washed in cool light; footprints cross and recross the dust in orderly loops.%-1,R25,R32,-1
 R32%F4%Security Chamber%Computers beeping; one monitor screen turned on waiting for password input; locked file cabinet.%-1,-1,R28,R31
+
 
 
