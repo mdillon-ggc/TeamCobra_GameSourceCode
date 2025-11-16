@@ -15,6 +15,9 @@ public class Puzzle {
     private boolean solved = false;
     private boolean failed = false;
 
+    // 🔒 nuevo: referencia al jugador que está haciendo este puzzle
+    private Player puzzlePlayer;
+
     // Constructor
     public Puzzle(String puzzleID,
                   String name,
@@ -38,6 +41,8 @@ public class Puzzle {
         this.attempts = maxAttempts;
         this.solved = false;
         this.failed = false;
+
+        this.puzzlePlayer = null;
     }
 
     // Getter methods
@@ -59,6 +64,12 @@ public class Puzzle {
 
         if (playerAnswer.equals(answer)) {
             solved = true;
+
+            // ✅ puzzle resuelto: liberar al jugador del modo puzzle
+            if (puzzlePlayer != null) {
+                puzzlePlayer.setInPuzzleMode(false);
+            }
+
             return passMessage;
         }
 
@@ -66,6 +77,12 @@ public class Puzzle {
 
         if (attempts <= 0) {
             failed = true;
+
+            // ❌ sin intentos: también liberar al jugador (puzzle terminado)
+            if (puzzlePlayer != null) {
+                puzzlePlayer.setInPuzzleMode(false);
+            }
+
             return failMessage + " (No attempts left. Puzzle locked.)";
         }
 
@@ -79,9 +96,15 @@ public class Puzzle {
         this.solved = false;
     }
 
-    // ⭐⭐⭐ THIS IS THE ONLY NEW THING HINA NEEDS ⭐⭐⭐
+    // ⭐ Aquí es donde Hina quería el lock del jugador
     // Start puzzle when player enters the room
     public void startPuzzle(Player player) {
+        // guardar referencia del jugador
+        this.puzzlePlayer = player;
+
+        // 🔒 BLOQUEAR MOVIMIENTO
+        player.setInPuzzleMode(true);
+
         System.out.println("You encounter a puzzle: " + name);
         System.out.println(description);
     }
