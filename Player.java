@@ -193,10 +193,14 @@ public class Player
 		}
 		else if(itemFound.getItemType().equals("useable"))
 		{
-			System.out.println(itemFound.getItemName() + " has been used.\n");
-			Useable itemToUse = null;
+			Useable itemToUse = (Useable) itemFound;
+			itemToUse.use(); //call its use() method (which decreases stack and prints message)
+			if(itemToUse.getCurrentStack() <= 0){
+				playerInventory.remove(itemToUse);
+				System.out.println(itemToUse.getItemName() + " has been removed from inventory");
+			}	
 		}	
-		else
+		else //unknown type
 		{
 			System.out.println("Item type not valid.");
 		}
