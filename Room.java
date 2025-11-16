@@ -31,6 +31,19 @@ public class Room
         roomInventory = new ArrayList<>();
         characterList =new ArrayList<>();
         characterInRoom = new ArrayList<>();
+
+		if (roomID.equals("R17") || roomID.equals(R18)) 
+   			{
+	            room.setLocked(true);
+                room.setRequiredKey("A-08");
+	         }
+
+	    if (roomID.equals("R32")) 
+	         {
+	          room.setLocked(true);
+	          room.setRequiredKey("A-09");
+	        }
+
     }
 
     public String getRoomID() 
@@ -95,18 +108,6 @@ public class Room
 
         return false; 
    }
-
-   if (roomID.equals("R18")) 
-   {
-	room.setLocked(true);
-    room.setRequiredKey("A-08");
-	}
-
-	if (roomFloorID.equals("R32")) 
-	{
-	room.setLocked(true);
-	room.setRequiredKey("A-09");
-	}
 
     public boolean isVisited() 
     { 
@@ -238,5 +239,6 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
+
 
 
