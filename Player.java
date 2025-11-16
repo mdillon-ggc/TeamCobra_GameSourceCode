@@ -35,12 +35,16 @@ public class Player
 		visitedCheckpointRooms = new HashSet<>();
 
 		// add starting items
-		Item ShippingLabel = new Useable("S-01", "Shipping Label", "It is a shipping label", 1, 1);
-		playerInventory.add(ShippingLabel);
-		Item PocketKnife = new Useable("S-02", "Pocket Knife", "It is a Pocket Knife", 1, 1);
-		playerInventory.add(PocketKnife);
-		Item LockPick = new Useable("S-03", Lock Pick", "It is a lock pick", 1, 1);
-		playerInventory.add(LockPick);
+		for (Item template: FileLoader.getItemList()) {
+			if (template.getItemName().equalsIgnoreCase("Shipping Label") ||
+					template.getItemName().equalsIgnoreCase("Pocket_Knife") ||
+					template.getItemName().equalsIgnoreCase("Lockpick")) {
+
+				Item starterItem = template.clone();
+				starterItem.setCurrentStack(1);
+				playerInventory.add(starterItem);
+			}
+		}
 	}
 
 	public String getPlayerName()
