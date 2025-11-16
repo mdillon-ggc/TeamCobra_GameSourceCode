@@ -597,7 +597,7 @@ public class Player
 		}
 
 		// Get the next room from the room map
-		Room nextRoom = roomMap.get(nextRoomID);
+		Room nextRoom = gameMap.get(nextRoomID);
 
 		 		if (nextRoom.isLocked()) 
  		{
