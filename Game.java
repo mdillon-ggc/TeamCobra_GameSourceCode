@@ -141,7 +141,7 @@ public class Game
 			if(input.startsWith("use "))
 			{
 				String item = input.substring(4).trim();
-				player.useItem(item);
+				player.useItem(item,roomMap);
 				continue;
 			}
 
