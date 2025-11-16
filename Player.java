@@ -659,4 +659,9 @@ public class Player
 	        e.printStackTrace();
 	    }
 	}
+
+	public boolean hasItem(String requiredKeyID)
+	{	
+		return playerInventory.contains(requiredKeyID);
+	}
 }
