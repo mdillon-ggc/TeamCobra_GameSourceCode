@@ -5,8 +5,7 @@ public class Consumable extends Item{
 	public Consumable(String itemID, String itemName, String itemDesc, 
 			int itemValue, int maxStack) {
 		super(itemID, itemName, itemDesc, itemValue, maxStack);
-		this.HP = itemValue;
-		//this.itemType = "consumable"; /////////// ✅ Set itemType
+		this.itemType = "consumable"; /////////// ✅ Set itemType
 	}
 	//getters
 	public int getHP() {
@@ -29,5 +28,6 @@ public class Consumable extends Item{
         }
     }
 }
+
 
 
