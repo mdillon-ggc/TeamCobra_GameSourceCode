@@ -105,17 +105,17 @@ public class Character
     
     public boolean isNPC()
     {
-        return charType != null && charType.equalsIgnoreCase("NPC");
+        return this instanceof NPC; 
     }
 
     public boolean isMonster()
     {
-        return charType != null && charType.equalsIgnoreCase("Monster");
+       return this instanceof Monster;
     }
 
     public boolean isAlive()
     {
-        return isMonster() && health > 0;
+        return health > 0;
     }
     
     public boolean canBeAttacked()
