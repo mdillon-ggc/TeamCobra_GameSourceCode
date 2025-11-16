@@ -1,3 +1,6 @@
+S-01%Shipping Label%Shipping Label%useable%1%1%0
+S-02%Pocket_Knife%Pocket Knife%useable%3%1%0
+S-03%Lockpick%Lockpick%useable%1%1%0
 A-01%Revolver%a type of handgun with a revolving cylinder that holds several cartridges%weapon%100%1%R10
 A-02%Bullets%a projectile fired from a gun%consumable%1%100%R01:3,R05:1,R10:2,R25:4,R32:10
 A-03%Gold Coins%Gold Coins%useable%1%100%R03:2,R08:6,R09:3,R15:10,R19:3,R25:5,R28:12
@@ -19,3 +22,4 @@ A-18%Clue Fragment #2%“Watch your step, don’t step too hard; Say ‘no more 
 A-19%Clue Fragment #3%“9110”%useable%1%1%R28
 A-20%Clue Fragment #4%“alpha-9-tango-bravo”%useable%1%1%R35
 A-21%Safe Clue%“1815”%useable%1%1%R10
+
