@@ -120,8 +120,7 @@ public class Player
 			Item item = playerInventory.get(i);
 
 			System.out.println("Slot " + i + ": " + item.getItemName()
-			+ " | Quantity: " + item.getCurrentStack());
-		}
+        + " (x" + item.getCurrentStack() + ")");
 
 		for (int i = playerInventory.size(); i < 8; i++) 
 		{
