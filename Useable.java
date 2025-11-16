@@ -4,6 +4,7 @@ public class Useable extends Item{
     public Useable(String itemID, String itemName, String itemDesc, int itemValue, int maxStack) {
         super(itemID, itemName, itemDesc, itemValue, maxStack);
         this.maxUseAmount = itemValue;
+        this.itemType = "useable";
     }
 
     @Override
@@ -25,3 +26,4 @@ public class Useable extends Item{
         }
     }
 }
+
