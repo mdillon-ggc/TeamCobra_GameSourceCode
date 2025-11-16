@@ -92,22 +92,22 @@ public class Room
  	}
 
  	public boolean unlockRoom(Player player) 
- 	{
-      if (requiredKeyID == null) 
- 	{
-           locked = false;
-           return true;
-     }
+	{
+		if (requiredKeyID == null) 
+		{
+			locked = false;
+			return true;
+		}
 
- 	if (player.hasItem(requiredKeyID)) 
- 	{
-           locked = false;
-           System.out.println("requiredKeyID " + " used to unlock door.");
-           return true;
-      }
+		if (player.hasItem(requiredKeyID)) 
+		{
+			locked = false;
+			System.out.println("requiredKeyID " + " used to unlock door.");
+			return true;
+		}
 
-        return false; 
-   }
+		return false; 
+	}
 
     public boolean isVisited() 
     { 
@@ -224,10 +224,10 @@ public class Room
 	{
 		if(player.getDetectionLvl() >= 3)
 		{
-			if(eliteMercernary != null && !CharacterInRoom.contains(eliteMercernary))
+			if(eliteMercernary != null && !characterInRoom.contains(eliteMercernary))
 			{
 				System.out.println(((NPC)eliteMercernary).getAlt());
-				CharacterInRoom.add(eliteMercernary);
+				characterInRoom.add(eliteMercernary);
 				System.out.println("Alert triggered!" + eliteMercernary.getName() 
 				+ "has appeared!\n");
 			}
@@ -239,7 +239,3 @@ public class Room
 		this.eliteMercernary = eliteMerc;
 	}
 }
-
-
-
-
