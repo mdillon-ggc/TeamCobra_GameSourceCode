@@ -11,11 +11,11 @@ public class Character
     private int health;
 
     // Constructor
-    public Character(String id, String name, String preExisting,
+    public Character(String iD, String name, String preExisting,
                      String spawn, String monsterDies, String playerDies,
                      int damage, int health)
     {
-        this.iD = id;
+        this.iD = iD;
         this.name = name;
         this.preExisting = preExisting;
         this.spawn = spawn;
