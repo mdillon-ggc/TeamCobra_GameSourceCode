@@ -3,8 +3,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import javax.swing.*;
 
 public class Player
 {
@@ -12,27 +13,26 @@ public class Player
 	private String currentRoomID;
 	private String previousRoomID; //for flee 
 	private String playerName;
-	private int playerHP = 100;
-	private int playerDamage = 5;
+	private int playerHP;
+	private int playerMaxHP;
+	private int playerDamage;
 	private double detectionLvl;
 	private boolean triggered;
 	private Item equippedItem;
-	private ArrayList<Item> playerInventory = new ArrayList<>();
-	private ArrayList<Item> equippedItems = new ArrayList<>();
+	private ArrayList<Item> playerInventory;
+	private ArrayList<Item> equippedItems;
+	private HashSet<String> visitedCheckpointRooms;
 
 	public Player(String startingRoomID)
 	{
 		currentRoomID = startingRoomID;
 		this.playerHP = 100;
+		this.playerMaxHP = 100;
 		this.playerDamage = 5;
-	}
-
-	public Player(String playerName, int playerHP, int playerDamage)
-	{
-		this.playerName = playerName;
-		this.playerHP = playerHP;
-		this.playerDamage = playerDamage;
 		this.detectionLvl = 0;
+		playerInventory = new ArrayList<>();
+		equippedItems = new ArrayList<>();
+		visitedCheckpointRooms = new HashSet<>();
 	}
 
 	public String getPlayerName()
@@ -88,16 +88,19 @@ public class Player
 	public void exploreRoom(Map <String, Room> gameMap)
 	{
 		Room currentRoom = gameMap.get(currentRoomID);
-		System.out.println("Desc:" + currentRoom.getRoomDescr());
+		System.out.println("Room name: " + currentRoom.getRoomName());
+		System.out.println("Desc: " + currentRoom.getRoomDescr());
 		System.out.println("Items: " + currentRoom.getItems());
 		System.out.println("Characters: " + currentRoom.getCharacterList());
+		System.out.println("Exits: " + currentRoom.getExits().keySet());
+		System.out.println();
 	}
 
 	public void accessInventory()
 	{
 		if (playerInventory.isEmpty())
 		{
-			System.out.println("Inventory is empty.");
+			System.out.println("Inventory is empty.\n");
 			return;
 		}
 		for(int i = 0; i < playerInventory.size(); i++)
@@ -107,11 +110,24 @@ public class Player
 			System.out.println("Slot " + i + ": " + item.getItemName()
 			+ " | Quantity: " + item.getCurrentStack());
 		}
+
+		for (int i = playerInventory.size(); i < 8; i++) 
+		{
+	        System.out.println("Slot " + i + ": [Empty]");
+	    }
+		System.out.println();
 	}
 
 	public void pickUpItem(String item, Map <String, Room> gameMap)
 	{
 		// Search for the item in the current room and add it to inventory
+		if (playerInventory.size() >= 8) 
+		{
+	        System.out.println("Inventory full!"
+	        		+ " You cannot carry more than 8 stacks of items.\n");
+	        return;
+	    }
+		
 		Room currentRoom = gameMap.get(currentRoomID);
 		Item itemToPickUp = null;
 		for (Item itemInRoom : currentRoom.getItems()) {
@@ -123,9 +139,9 @@ public class Player
 		if (itemToPickUp != null) {
 			playerInventory.add(itemToPickUp);
 			currentRoom.removeItem(itemToPickUp);
-			System.out.println(itemToPickUp.getItemName() + " added to inventory.");
+			System.out.println(itemToPickUp.getItemName() + " added to inventory.\n");
 		} else {
-			System.out.println("Item is not found in this room.");
+			System.out.println("Item is not found in this room.\n");
 		}	
 	}//end pickUpItem method
 
@@ -143,9 +159,9 @@ public class Player
 		if (itemToDrop != null) {
 			playerInventory.remove(itemToDrop);
 			currentRoom.addItem(itemToDrop);
-			System.out.println("Dropped: " + itemToDrop.getItemName() + " from this room");
+			System.out.println("Dropped: " + itemToDrop.getItemName() + " from this room.\n");
 		} else {
-			System.out.println("Item can not be dropped.");
+			System.out.println("Item can not be dropped.\n");
 		}			
 	}//end dropItem method
 
@@ -161,7 +177,8 @@ public class Player
 			}
 		}
 		if (itemFound == null) {
-			System.out.println("You don't have an item named '" + item + "' in your inventory.");
+			System.out.println("You don't have an item named '" + 
+				item + "' in your inventory.\n");
 			return;
 		}
 
@@ -176,7 +193,7 @@ public class Player
 		}
 		else if(itemFound.getItemType().equals("useable"))
 		{
-			System.out.println(itemFound.getItemName() + " has been used.");
+			System.out.println(itemFound.getItemName() + " has been used.\n");
 			Useable itemToUse = null;
 		}	
 		else
@@ -198,7 +215,7 @@ public class Player
 				return;
 			}
 		}
-		System.out.println("Item is not found in the Inventory");		
+		System.out.println("Item is not found in the Inventory.\n");		
 	}//end inspectItem method
 
 	public void equipItem(String itemName)
@@ -206,7 +223,7 @@ public class Player
 		// Check if the inventory exists and is not empty
 		if (playerInventory == null || playerInventory.isEmpty())
 		{
-			System.out.println("Your inventory is empty.");
+			System.out.println("Your inventory is empty.\n");
 			return;
 		}
 
@@ -224,26 +241,27 @@ public class Player
 		// If the item does not exist in the inventory
 		if (itemToEquip == null)
 		{
-			System.out.println("That item is not in your inventory.");
+			System.out.println("That item is not in your inventory.\n");
 			return;
 		}
 
 		// If the item exists but cannot be equipped
 		if (!itemToEquip.isEquipable())
 		{
-			System.out.println("You cannot equip this item.");
+			System.out.println("You cannot equip this item.\n");
 			return;
 		}
 
 		// If the player already has an item equipped, unequip it first
-		if (equippedItem != null)
-		{
-			System.out.println("You unequipped: " + equippedItem.getItemName());
-		}
+		// if (equippedItem != null)
+		// {
+		// 	System.out.println("You unequipped: " + equippedItem.getItemName());
+		// }
 
 		// Equip the new item
 		equippedItem = itemToEquip;
 		System.out.println("You equipped: " + equippedItem.getItemName());
+		System.out.println();
 	}
 
 	public void unequipItem(String itemName)
@@ -258,6 +276,7 @@ public class Player
 		// Unequip the currently equipped item
 		System.out.println("You unequipped: " + equippedItem.getItemName());
 		equippedItem = null;
+		System.out.println();
 	}
 
 	// Method to increase detection level (for puzzles/items that affect detection)
@@ -298,16 +317,18 @@ public class Player
 		playerHP = Math.max(0, playerHP - amount);
 		System.out.println("You took " + amount + " damage!");
 		System.out.println("Current HP: " + playerHP); 
+		System.out.println();
 	}
 
 	public void flee() // need flee <N|E|S|W>
 	{
 		if (previousRoomID == null)
 		{	
-			System.out.println("There is nowhere you can flee.");
+			System.out.println("There is nowhere you can flee.\n");
 			return;
 		}
 		System.out.println("You flee back to room " + previousRoomID + ".");
+		System.out.println();
 		currentRoomID = previousRoomID;
 	}
 
@@ -344,10 +365,19 @@ public class Player
 			writer.println("Equipped Items:");
 			for(Item item : equippedItems)
 			{
-				writer.println(item);
+				writer.println(item.getItemID());
 			}
 
 			writer.println("End Equipped");
+
+			writer.println("CheckpointRooms:");
+			
+			for (String roomID : visitedCheckpointRooms) 
+			{
+			    writer.println(roomID);
+			}
+			
+			writer.println("End CheckpointRooms");
 
 			writer.println("Rooms:");
 			for(Room room : gameMap.values())
@@ -371,7 +401,7 @@ public class Player
 			}
 			writer.println("End Room");
 
-			System.out.println("Game saved. File saved under name: ");
+			System.out.println("Game saved. File saved under name: " + fileName);
 			System.out.println();
 		}
 
@@ -381,13 +411,14 @@ public class Player
 		}
 	}
 
-	public void loadGame(String fileName, ArrayList<Character> characters, ArrayList<Item> items, Map <String, Room> gameMap)
+	public void loadGame(String fileName, ArrayList<Character> characters, 
+			ArrayList<Item> items, Map <String, Room> gameMap)
 	{
 		try(BufferedReader reader = new BufferedReader(new FileReader(fileName)))
 		{
 			String line;
 
-			line = reader.readLine();
+			reader.readLine();
 
 			currentRoomID = reader.readLine();
 			detectionLvl = Double.parseDouble(reader.readLine());
@@ -425,57 +456,66 @@ public class Player
 				}
 			}
 
-			line = reader.readLine();
+			reader.readLine();
+			visitedCheckpointRooms.clear();
+
+			while (!(line = reader.readLine()).equals("End CheckpointRooms")) 
 			{
-				while (!(line = reader.readLine()).equals("End Room")) 
+			    visitedCheckpointRooms.add(line.trim());
+			}
+
+			reader.readLine();
+
+			while (!(line = reader.readLine()).equals("End Room")) 
+			{
+				String[] parts = line.split(",", -1);
+				String roomID = parts[0];
+				boolean visited = Boolean.parseBoolean(parts[1]);
+				Room room = gameMap.get(roomID);
+
+				if (room == null) continue;
+
+				room.setVisited(visited);
+
+				room.getCharacterList().clear();
+				if (!parts[2].isEmpty()) 
 				{
-					String[] parts = line.split(",", 4); // roomID, visited, characters, items
-					String roomID = parts[0];
-					boolean visited = Boolean.parseBoolean(parts[1]);
-					Room room = gameMap.get(roomID);
-
-					if (room == null) continue;
-
-					room.setVisited(visited);
-
-					room.getCharacterList().clear();
-					if (!parts[2].isEmpty()) 
+					String[] charIDs = parts[2].split("\\|");
+					for (String iD : charIDs) 
 					{
-						String[] charIDs = parts[2].split("\\|");
-						for (String id : charIDs) 
+						for (Character character : characters) 
 						{
-							for (Character ch : characters) 
+							if (character.getiD().equals(iD)) 
 							{
-								if (ch.getiD().equals(id)) 
-								{
-									room.setCharacter(ch);
-									break;
-								}
-							}
-						}
-					}
-
-					room.getItems().clear();
-					if (!parts[3].isEmpty()) 
-					{
-						String[] itemIDs = parts[3].split("\\|");
-						for (String id : itemIDs) 
-						{
-							for (Item item : items) 
-							{
-								if (item.getItemID().equals(id)) 
-								{
-									room.addItem(item);
-									break;
-								}
+								room.setCharacter(character);
+								break;
 							}
 						}
 					}
 				}
 
+				room.getItems().clear();
+				if (!parts[3].isEmpty()) 
+				{
+					String[] itemIDs = parts[3].split("\\|");
+					for (String iD : itemIDs) 
+					{
+						for (Item item : items) 
+						{
+							if (item.getItemID().equals(iD)) 
+							{
+								room.addItem(item);
+								break;
+							}
+						}
+					}
+				}
 			}
 
-			System.out.println("Loaded game.");
+
+			System.out.println("~Loading Game...~");
+			System.out.println("Game has loaded!");
+			System.out.println();
 		}
 
 		catch(Exception e)
@@ -486,8 +526,38 @@ public class Player
 
 	public void readMap()
 	{
-		// TODO Auto-generated method stub
+		String floorID = currentRoom.getRoomFloorID();
 
+		String map = switch(floorID) {
+			case "F1" -> "F1.jpg";
+			case "F2" -> "F2.jpg";
+			case "F3" -> "F3.jpg";
+			case "F4" -> "F4.jpg";
+			default -> null;
+		};
+
+		if (map == null) {
+			System.out.println("The file name does not exist. "
+					+ "Try a different file name.\n");
+	        return;
+	    }
+		
+	    // Load image
+	    ImageIcon mapIcon = new ImageIcon(map);
+
+	    // Create a frame to display the map
+	    JFrame frame = new JFrame("Game Map");
+	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // only close this window
+	    frame.setSize(800, 600); // adjust size as needed
+
+	    // Add the image to a label
+	    JLabel label = new JLabel(mapIcon);
+	    label.setHorizontalAlignment(JLabel.CENTER);
+	    label.setVerticalAlignment(JLabel.CENTER);
+	    frame.add(label);
+	    
+	    frame.setLocationRelativeTo(null); // center on screen
+	    frame.setVisible(true);
 	}
 
 	public void startPuzzle()
@@ -501,14 +571,14 @@ public class Player
 
 		// Check if the current room has an exit in that direction
 		if (!currentRoom.getExits().containsKey(direction)) {
-			System.out.println("You can't go that way.");
+			System.out.println("You can't go that way.\n");
 			return;
 		}
 
 		String nextRoomID = currentRoom.getExits().get(direction);
 
 		if (nextRoomID == null || nextRoomID.equals("-1")) {
-			System.out.println("You can't go that way.");
+			System.out.println("You can't go that way.\n");
 			return;
 		}
 
@@ -517,7 +587,7 @@ public class Player
 
 		
 		if (nextRoom == null) {
-			System.out.println("That room does not exist.");
+			System.out.println("That room does not exist.\n");
 			return;
 		}
 
@@ -530,14 +600,40 @@ public class Player
 			currentRoom.setVisited(true);
 		}
 
+		if (currentRoom.isCheckpoint()) {
+			if (!visitedCheckpointRooms.contains(currentRoomID)) {
+	            playerHP = playerMaxHP;
+	            visitedCheckpointRooms.add(currentRoomID);
+	            System.out.println("Checkpoint reached! HP refilled to max.");
+	        }
+	        saveCheckpoint(gameMap);
+	    }
+		
 		// Display room info
 		System.out.println(currentRoom.getRoomName());
 		System.out.println("Exits: " + currentRoom.getExits().keySet());
+		System.out.println();
 
 		// Automatically start puzzle if the room has one
 		// NOTE: adjust method names if your Room/Puzzle classes are different
 		if (currentRoom.hasPuzzle()) {
 			currentRoom.getPuzzle().startPuzzle(this);
 		}
+	}
+
+	private void saveCheckpoint(Map<String, Room> gameMap) 
+	{
+	    try 
+	    {
+	        String fileName = "checkpoint.txt"; //always overwrite
+	        saveGame(fileName, gameMap);
+	        System.out.println("Checkpoint saved at " + currentRoom.getRoomName());
+	        System.out.println();
+	    } 
+	    
+	    catch (Exception e) 
+	    {
+	        e.printStackTrace();
+	    }
 	}
 }
