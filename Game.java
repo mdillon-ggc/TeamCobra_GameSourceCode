@@ -81,7 +81,10 @@ public class Game
 			        System.out.println(currentRoom.getRoomDescr());
 			        System.out.println("Exits: " + currentRoom.getExits().keySet());
 
-			        player.startPuzzle();
+			        if (currentRoom.hasPuzzle()) {
+						currentRoom.getPuzzle().startPuzzle(player);
+					}
+					//player.startPuzzle();
 			        continue;
 				}
 			}
