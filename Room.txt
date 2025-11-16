@@ -13,7 +13,7 @@ R11%F2%Private Lounge%Deep chairs placed around a low table set made of crystal;
 R12%F2%Office%An office with a view! And a wall safe behind some artwork.%R11,R13,-1,-1
 R13%F2%East Hall%A long corridor of polished wood and shadowed corners; a draft fingers the candle cups along the wall.%R12,-1,R09,R14
 R14%F2%Balcony Walkway%Night air presses cool against your skin; stone columns feel cold to the touch.%R15,-1,R13,R16
-R15%F2%Guest Suite%Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.%-1,R14,-1,-1
+R15%F2%Guest Suite%Smooth sheets on a neatly made bed, a suitcase half-unzipped on the ottoman—someone planned to return soon.%-1,R18,-1,-1
 R16%F2%South Stairway%Stone steps tighten into a narrow well; the temperature drops and the air feels damp.%R23,-1,-1,R14
 R17%F3%Security Hub%Blinking panels and screens on a wall.%R22,-1,R18,R24
 R18%F3%Server Closet%The humming sound and heat of server racks fills the room. Status LEDs stutter like a city at night behind glass panels.%-1,-1,-1,R17
@@ -31,4 +31,5 @@ R29%F4%Service Loft%Bare rafters and a network of ducts seems to all connect her
 R30%F4%Vault%Polished steel door with multi-step code.%-1,-1,-1,R02
 R31%F4%North Landing%A calm junction washed in cool light; footprints cross and recross the dust in orderly loops.%-1,R25,R32,-1
 R32%F4%Security Chamber%Computers beeping; one monitor screen turned on waiting for password input; locked file cabinet.%-1,-1,R28,R31
+
 
