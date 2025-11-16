@@ -515,15 +515,7 @@ public class Player
 		// Get the next room from the room map
 		Room nextRoom = roomMap.get(nextRoomID);
 
-// 		if (nextRoom.isLocked()) 
-// 		{
-//     		if (!nextRoom.unlockRoom(this)) 
-// 			{   
-//         		System.out.println("The door is locked.");
-//         		return;  
-//     		}
-// 		}
-
+		
 		if (nextRoom == null) {
 			System.out.println("That room does not exist.");
 			return;
