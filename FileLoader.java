@@ -7,12 +7,12 @@ import java.util.*;
 
 public class FileLoader
 {
-	private Map<String, Room> gameMap = new HashMap<>();
-	private ArrayList<Item> itemAL = new ArrayList<>();
-	private ArrayList<Puzzle> puzzleAL = new ArrayList<>();
-	private ArrayList<Character> charAL = new ArrayList<>();
+	private static Map<String, Room> gameMap = new HashMap<>();
+	private static ArrayList<Item> itemAL = new ArrayList<>();
+	private static ArrayList<Puzzle> puzzleAL = new ArrayList<>();
+	private static ArrayList<Character> charAL = new ArrayList<>();
 
-	public Map<String, Room> loadRooms(String fileName)
+	public static Map<String, Room> loadRooms(String fileName)
 	{
 		try(Scanner scan = new Scanner(new File(fileName)))
 		{
@@ -67,7 +67,7 @@ public class FileLoader
 		return gameMap;
 	}
 
-	public ArrayList<Item> loadItems(String fileName)
+	public static ArrayList<Item> loadItems(String fileName)
 	{
 		try(Scanner scan = new Scanner(new File(fileName)))
 		{
@@ -147,6 +147,10 @@ public class FileLoader
 							room.addItem(item);
 							itemAL.add(item);
 						}
+						else
+						{
+							itemAL.add(item);
+						}
 					}
 				}
 				catch(Exception e)
@@ -167,7 +171,7 @@ public class FileLoader
 	}
 
 
-	public ArrayList<Puzzle> loadPuzzles(String fileName)
+	public static ArrayList<Puzzle> loadPuzzles(String fileName)
 	{
 		try (Scanner scan = new Scanner(new File(fileName)))
 		{
@@ -238,7 +242,7 @@ public class FileLoader
 	}
 
 
-	public ArrayList<Character> loadChars(String fileName)
+	public static ArrayList<Character> loadChars(String fileName)
 	{
 		try(Scanner scan = new Scanner(new File(fileName)))
 		{
@@ -335,22 +339,22 @@ public class FileLoader
 		return charAL;
 	}
 
-	public Map<String, Room> getRoomMap() 
+	public static Map<String, Room> getRoomMap() 
 	{
 		return gameMap;
 	}
 
-	public ArrayList<Item> getItemList() 
+	public static ArrayList<Item> getItemList() 
 	{
 		return itemAL;
 	}
 
-	public ArrayList<Puzzle> getPuzzleList() 
+	public static ArrayList<Puzzle> getPuzzleList() 
 	{
 		return puzzleAL;
 	}
 
-	public ArrayList<Character> getCharList() 
+	public static ArrayList<Character> getCharList() 
 	{
 		return charAL;
 	}
