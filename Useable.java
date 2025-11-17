@@ -1,9 +1,12 @@
 public class Useable extends Item{
     private int maxUseAmount;
+    private int currentUseAmount;
     //constructor
     public Useable(String itemID, String itemName, String itemDesc, int itemValue, int maxStack) {
         super(itemID, itemName, itemDesc, itemValue, maxStack);
         this.maxUseAmount = itemValue;
+        this.currentUseAmount = itemValue;
+        this.currentStack = 1;
         this.itemType = "useable";
     }
 
@@ -17,6 +20,11 @@ public class Useable extends Item{
     	return maxUseAmount;
     }
     
+    public int getCurrentUseAmount() 
+    {
+        return currentUseAmount;
+    }
+    
     public void use() {
         if (currentStack > 0) {
             currentStack--;
@@ -26,4 +34,3 @@ public class Useable extends Item{
         }
     }
 }
-
