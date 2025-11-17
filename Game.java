@@ -340,28 +340,40 @@ public class Game
     }
 
     public void help()
-    {
-        System.out.println("\n------------------------Help Menu---------------------------");
-        System.out.println(" quit                        | Exit game");
-        System.out.println(" help                        | Open help menu");
-        System.out.println(" read map                    | Open a pop-up map of game for each floor");
-        System.out.println(" go <direction>              | Navigate rooms");
-        System.out.println(" explore                     | View the room details");
-        System.out.println(" check status                | View player statistics");
-        System.out.println(" inventory                   | Open player inventory");
-        System.out.println(" pick up <item>              | Pick up an item in the room");
-        System.out.println(" inspect <item>              | Get item details from inventory items");
-        System.out.println(" use <item>                  | Use/consume item in inventory");
-        System.out.println(" drop <item>                 | Remove an item from player inventory into the room");
-        System.out.println(" equip <weapon>              | Equip a weapon from player inventory");
-        System.out.println(" unequip <weapon>            | Unequip a weapon from player inventory");
-        System.out.println(" attack <monster>            | Enter combat mode and attack a monster");
-        System.out.println(" save <filename>             | Save the game progress");
-        System.out.println(" load <filename>             | Load a saved file");
-        System.out.println(" load checkpoint             | Load a saved checkpoint file");
-        System.out.println(" flee                        | Player flees to the previous room");
-        System.out.println(" flee <N|S|E|W>              | Flee north, south, east, or west\n");
-    }
+	{
+		System.out.println("\n------------------------Help Menu---------------------------");
+		System.out.println(" quit                        | Exit game");
+		System.out.println(" help                        | Open help menu");
+		System.out.println(" read map                    | Open a pop-up map of game for each floor");
+		System.out.println(" go <direction>              | Navigate rooms");
+		System.out.println(" explore                     | View the room details");
+		System.out.println(" check status                | View player statistics");
+		System.out.println(" inventory                   | Open player inventory");
+		System.out.println(" pick up <item>              | Pick up an item in the room");
+		System.out.println(" inspect <item>              | Get item details from inventory items");
+		System.out.println(" use <item>                  | Use/consume item in inventory");
+		System.out.println(" drop <item>                 | Remove an item from player inventory into the room");
+		System.out.println(" equip <weapon>              | Equip a weapon from player inventory");
+		System.out.println(" unequip <weapon>            | Unequip a weapon from player inventory");
+		System.out.println(" attack <monster>            | Enter combat mode and attack a monster");
+		System.out.println(" save <filename>             | Save the game progress");
+		System.out.println(" load <filename>             | Load a saved file");
+		System.out.println(" load checkpoint             | Load a saved checkpoint file\n");
+	}
+    
+    private void helpInCombat() 
+	{
+		System.out.println("\n---------------- Help Menu In Combat-----------------------");
+		System.out.println(" inventory                 |  View inventory");
+		System.out.println(" inspect <item name>       |  View item details in inventory");
+		System.out.println(" equip <item name>         |  Equip item in inventory");
+		System.out.println(" unequip <item name>       |  Unequip item in inventory");
+		System.out.println(" use <item>                | Use/consume item in inventory");
+		System.out.println(" attack <monster>          | Enter combat mode and attack a monster");
+		System.out.println(" flee                      | Player flees to the previous room");
+		System.out.println(" flee <N|S|E|W>            | Flee north, south, east, or west");
+		System.out.println(" help                      |  Show help menu in combat\n");
+	}
 
     public static void main(String[] args)
     {
