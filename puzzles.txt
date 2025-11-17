@@ -8,6 +8,3 @@ P-07%Sensor Plate Bypass%R26%A series of pressure plates block your path. Say th
 P-08%Biometric Spoof%R27%A fingerprint scanner awaits a valid print. Use your spoofer.%spoofer%PASS: The scanner accepts the spoofed print and the door slides open.%FAIL: The scanner blinks red and rejects your fake print.%5
 P-09%Vault Keypad Step%R30%A keypad asks for a secret code. Use the one from your clue fragment.%9110%PASS: The keypad accepts the code and heavy locks begin to turn.%FAIL: The keypad flashes red and blocks another attempt.%5
 P-10%Vault Final Code%R30%Multiple locks guard the vault door. Enter the final phrase.%alpha-9-tango-bravo%PASS: The vault opens and you finally obtain the rare gemstone.%FAIL: The vault remains sealed, ignoring your incorrect phrase.%5
-
-
-
