@@ -1,15 +1,16 @@
 public class Consumable extends Item{
-	private int HP;
+	private int hP;
 
 	//constructor
-	public Consumable(String itemID, String itemName, String itemDesc, 
+	public Consumable(String itemID, String itemName, String itemDesc,
 			int itemValue, int maxStack) {
 		super(itemID, itemName, itemDesc, itemValue, maxStack);
-		this.itemType = "consumable"; /////////// ✅ Set itemType
+		this.hP = itemValue;
+		this.itemType = "consumable";
 	}
 	//getters
 	public int getHP() {
-		return HP;
+		return hP;
 	}
 
 	@Override
@@ -22,12 +23,9 @@ public class Consumable extends Item{
         if (currentStack > 0) {
             currentStack--;
             System.out.println("Consumed " + itemName + ", restoring " 
-				+ HP + " HP. Remaining: " + currentStack);
+            + hP + " HP. Remaining: " + currentStack);
         } else {
             System.out.println(itemName + " is out of stock!");
         }
     }
 }
-
-
-
