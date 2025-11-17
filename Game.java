@@ -194,7 +194,17 @@ public class Game
 				
 				player.attack(monster); //go to combat mode
 				continue;
-			}
+				player.attack(monster);
+                if (monster.isMonster() && monster.isAlive())   
+				{
+					monsterCounterAttack(monster);
+				}	
+					else if (!monster.isAlive())
+					{
+						 currentRoom.getCharacterList().remove(monster);
+					}
+					continue;
+		}
 			
 			if (input.startsWith("flee"))
 			{
@@ -279,7 +289,19 @@ public class Game
 			}
 		}
 	}
+				private void monsterCounterAttack(Character monster)
+{
+  				int dmg = monster.getDamage();
+    			System.out.println(monster.getName() + " attacks you for " + dmg + " damage!\n");
 
+    			player.takeDamage(dmg);
+    			if (player.getPlayerHP() <= 0)
+   				{
+        			System.out.println(monster.getPlayerDies());   // text from Character.txt
+        			System.out.println("Game Over.\n");
+       				System.exit(0);
+    }
+}
 	public void help()
 	{
 		System.out.println("\n------------------------Help Menu---------------------------");
