@@ -202,19 +202,22 @@ public class Game
                 }
                 continue;
             }
-            
+
             if (input.startsWith("flee"))
             {
-                
+                if (!hasLivingMonster(currentRoom))
+                {
+                    System.out.println("You can only flee while in combat with a monster.\n");
+                    continue;
+                }
                 String arg = input.length() > 4 ? input.substring(5).trim() : "";
 
                 if (arg.isEmpty())
                 {
-                    System.out.println("Which direction do you want to flee?"
-                            + " (N/S/E/W or north/east/south/west)");
+                    System.out.println("Which direction do you want to flee? (N/S/E/W or north/east/south/west)");
                     continue;
                 }
-                
+
                 String direction = arg.toLowerCase();
                 if (direction.equals("n")) direction = "north";
                 else if (direction.equals("s")) direction = "south";
@@ -355,13 +358,29 @@ public class Game
         int dmg = monster.getDamage();
         System.out.println(monster.getName() + " attacks you for " + dmg + " damage!\n");
 
-        player.takeDamage(dmg);
+       
+        player.takeDamage(dmg, monster);
+
+      
         if (player.getPlayerHP() <= 0)
         {
-            System.out.println(monster.getPlayerDies());   // text from Character.txt
+            System.out.println(monster.getPlayerDies());   
             System.out.println("Game Over.\n");
             System.exit(0);
         }
+    }
+    private boolean hasLivingMonster(Room room)
+    {
+        if (room == null) return false;
+
+        for (Character c : room.getCharacterList())
+        {
+            if (c.isMonster() && c.isAlive())
+            {
+                return true; 
+            }
+        }
+        return false;
     }
 
     public void help()
