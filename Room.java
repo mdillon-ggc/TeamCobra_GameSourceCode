@@ -102,7 +102,17 @@ public class Room
 		if (player.hasItem(requiredKeyID)) 
 		{
 			locked = false;
-			System.out.println(requiredKeyID + " used to unlock door.");
+			 String keyName = requiredKeyID; // fallback to ID if not found
+		        for (Item item : player.getInventory()) 
+		        {
+		            if (item.getItemID().equals(requiredKeyID)) 
+		            {
+		                keyName = item.getItemName();
+		                break;
+		            }
+		        }
+
+			System.out.println(keyName + " used to unlock door.");
 			return true;
 		}
 
@@ -239,4 +249,3 @@ public class Room
 		this.eliteMercenary = eliteMerc;
 	}
 }
-
