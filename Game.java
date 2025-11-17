@@ -93,7 +93,9 @@ public class Game
             System.out.println("Enter a command: ");
             String input = scan.nextLine().trim().toLowerCase();
 
-            // 🔒 NEW: if the player is in PuzzleMode, send input to the puzzle
+            // 🔒 When the player is in PuzzleMode, ALL input is sent to the active puzzle.
+            //     Example: if the solution for the window puzzle is "use lockpick",
+            //     the player types "use lockpick" and that exact string is passed here.
             if (player.isInPuzzleMode()) {
                 Room puzzleRoom = player.getCurrentRoom();
                 if (puzzleRoom != null && puzzleRoom.hasPuzzle()) {
