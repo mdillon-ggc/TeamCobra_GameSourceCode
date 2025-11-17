@@ -383,16 +383,40 @@ public class Player
     //player loses hp
     public void takeDamage(int amount)
     {
+        // delegate to the detailed version with no attacker
+        takeDamage(amount, null);
+    }
+
+    // detailed version – can also show monster stats
+    public void takeDamage(int amount, Character attacker)
+    {
         playerHP = Math.max(0, playerHP - amount);
         System.out.println("You took " + amount + " damage!");
-        System.out.println("Current HP: " + playerHP); 
         System.out.println();
+
+        // show player status (like checkStatus)
+        System.out.println("~Player stats~");
+        System.out.println("HP: " + playerHP + "/" + playerMaxHP);
+        System.out.println("Attack: " + playerDamage);
+        System.out.println("Detection: " + detectionLvl);
+        System.out.println("Current Room: " + currentRoomID);
+        System.out.println();
+
+        // if we know who hit us, show their stats too
+        if (attacker != null)
+        {
+            System.out.println("~Monster stats~");
+            System.out.println("Monster: " + attacker.getName());
+            System.out.println("HP: " + attacker.getHealth());
+            System.out.println("ATK: " + attacker.getDamage());
+            System.out.println();
+        }
     }
 
     public void flee() // need flee <N|E|S|W>
     {
         if (previousRoomID == null)
-        {   
+        {
             System.out.println("There is nowhere you can flee.\n");
             return;
         }
