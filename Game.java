@@ -192,8 +192,7 @@ public class Game
 					continue;
 				}
 				
-				player.attack(monster); //go to combat mode
-				continue;
+				
 				player.attack(monster);
                 if (monster.isMonster() && monster.isAlive())   
 				{
