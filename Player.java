@@ -752,5 +752,9 @@ public class Player
 	    return false;
 	}
 
-}
+	public ArrayList<Item> getInventory()
+	{
+		return playerInventory;
+	}
 
+}
