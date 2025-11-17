@@ -18,8 +18,7 @@ public class Game
         
         player.setCurrentRoom(roomMap.get(player.getCurrentRoomID()));
 
-        Room currentRoom = roomMap.get("R00");
-        currentRoom.setVisited(true);
+        Room currentRoom = player.getCurrentRoom();
 
         Character eliteMerc = null;
 
@@ -92,24 +91,6 @@ public class Game
 
             System.out.println("Enter a command: ");
             String input = scan.nextLine().trim().toLowerCase();
-
-            // 🔒 When the player is in PuzzleMode, ALL input is sent to the active puzzle.
-            //     Example: if the solution for the window puzzle is "use lockpick",
-            //     the player types "use lockpick" and that exact string is passed here.
-            if (player.isInPuzzleMode()) {
-                Room puzzleRoom = player.getCurrentRoom();
-                if (puzzleRoom != null && puzzleRoom.hasPuzzle()) {
-                    Puzzle activePuzzle = puzzleRoom.getPuzzle();
-                    String result = activePuzzle.tryAnswer(input);
-                    System.out.println(result);
-                } else {
-                    // safety fallback: no puzzle found
-                    player.setInPuzzleMode(false);
-                    System.out.println("There is no active puzzle in this room.\n");
-                }
-                // do NOT treat this as a normal command
-                continue;
-            }
 
             if(input.equals("quit"))
             {
@@ -251,31 +232,53 @@ public class Game
                 continue;
             }
 
-            if(input.startsWith("save"))
-            {
+            if (input.startsWith("save")) {
                 String[] parts = input.split(" ", 2);
-                if (parts.length < 2)
-                {
+                if (parts.length < 2) {
                     System.out.println("Save <filename>");
                     continue;
                 }
-                
+
+                // ✅ Ensure currentRoom is up-to-date
+                Room loadedRoom = roomMap.get(player.getCurrentRoomID());
+                player.setCurrentRoom(loadedRoom);
+                currentRoom = loadedRoom;
+
+                // ✅ Reset puzzle mode if the room has no active puzzle
+                if (!loadedRoom.hasPuzzle() || loadedRoom.getPuzzle().isSolved()) {
+                    player.setInPuzzleMode(false);
+                }
+
+                // ✅ Save file
                 String fileName = parts[1].replaceAll("[\\\\/:*?\"<>|]", "_") + ".txt";
                 player.saveGame(fileName, roomMap);
+
+                System.out.println("Game saved to " + fileName + "\n");
                 continue;
             }
+
 
             if (input.equals("load checkpoint")) 
             {
                 System.out.println("Loading checkpoint...");
+                
                 player.loadGame("checkpoint.txt", characters, items, roomMap);
 
-                currentRoom = roomMap.get(player.getCurrentRoomID());
-                player.setCurrentRoom(currentRoom);
+                // Restore the current room
+                Room loadedRoom = roomMap.get(player.getCurrentRoomID());
+                player.setCurrentRoom(loadedRoom);
+                currentRoom = loadedRoom;
+
+                // ✅ Reset puzzle mode if player wasn't mid-puzzle in save
+                if (loadedRoom.hasPuzzle() && loadedRoom.getPuzzle().isSolved()) {
+                    player.setInPuzzleMode(false);  // puzzle already solved
+                } else if (!loadedRoom.hasPuzzle()) {
+                    player.setInPuzzleMode(false);  // no puzzle in room
+                }
 
                 System.out.println("Loaded into: " + currentRoom.getRoomName());
                 continue;
-
+            
             }
             
             if(input.startsWith("load "))
@@ -293,6 +296,10 @@ public class Game
                 
                 currentRoom = roomMap.get(player.getCurrentRoomID());
                 player.setCurrentRoom(currentRoom);
+                
+                if (!currentRoom.hasPuzzle() || currentRoom.getPuzzle().isSolved()) {
+                    player.setInPuzzleMode(false);
+                }
 
                 System.out.println("Loaded into: " + currentRoom.getRoomName());
                 continue;
@@ -322,6 +329,22 @@ public class Game
                 System.out.println("HP: " + monster.getHealth());
                 System.out.println("ATK: " + monster.getDamage());
                 System.out.println();
+                continue;
+            }
+            
+         // 🔒 NEW: if the player is in PuzzleMode, send input to the puzzle
+            if (player.isInPuzzleMode()) {
+                Room puzzleRoom = player.getCurrentRoom();
+                if (puzzleRoom != null && puzzleRoom.hasPuzzle()) {
+                    Puzzle activePuzzle = puzzleRoom.getPuzzle();
+                    String result = activePuzzle.tryAnswer(input);
+                    System.out.println(result);
+                } else {
+                    // safety fallback: no puzzle found
+                    player.setInPuzzleMode(false);
+                    System.out.println("There is no active puzzle in this room.\n");
+                }
+                // do NOT treat this as a normal command
                 continue;
             }
         }
