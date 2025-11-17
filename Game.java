@@ -287,6 +287,27 @@ public class Game
 				player.readMap();
 				continue;
 			}
+			if(input.equals("check monster stats"))
+			{
+				Character monster = null;
+				 for (Character c : currentRoom.getCharacterList())
+					 {
+						 if (c.isMonster() && c.isAlive())
+						 {
+							 monster = c;
+							 break;
+						 }
+					 }
+				if (monster == null)
+                {
+					continue;
+				}
+				System.out.println("Monster: " + monster.getName());
+                System.out.println("HP: " + monster.getHealth());
+                System.out.println("ATK: " + monster.getDamage());
+                System.out.println();
+				 continue;
+			}
 		}
 	}
 				private void monsterCounterAttack(Character monster)
