@@ -9,13 +9,14 @@ public class Game
 	public void playGame()
 	{
 		Scanner scan = new Scanner(System.in);
-		FileLoader loader = new FileLoader();
-		Map<String, Room> roomMap = loader.loadRooms("Room.txt");
-		ArrayList<Item> items = loader.loadItems("item.txt");
-		ArrayList<Puzzle> puzzles = loader.loadPuzzles("puzzles.txt");
-		ArrayList<Character> characters = loader.loadChars("Character.txt");
+		Map<String, Room> roomMap = FileLoader.loadRooms("Room.txt");
+		ArrayList<Item> items = FileLoader.loadItems("item.txt");
+		ArrayList<Puzzle> puzzles = FileLoader.loadPuzzles("puzzles.txt");
+		ArrayList<Character> characters = FileLoader.loadChars("Character.txt");
 
 		player = new Player("R00");
+		
+		player.setCurrentRoom(roomMap.get(player.getCurrentRoomID()));
 
 		Room currentRoom = roomMap.get("R00");
 		currentRoom.setVisited(true);
@@ -33,16 +34,14 @@ public class Game
 
 		for(Room room : roomMap.values())
 		{
-			room.setEliteMercernary(eliteMerc);
+			room.setEliteMercenary(eliteMerc);
 		}
-
 
 		System.out.println("Welcome to Master Jewel Thief!\n");
 		System.out.println("Type 'quit' to exit the game.");
 		System.out.println("Type 'help' to open the help menu.");
 		System.out.println("Type 'read  map' to open the map.");
 		System.out.println("(Above commands only available after initial path chosen)\n");
-
 
 		while(true)
 		{
@@ -75,17 +74,19 @@ public class Game
 			        currentRoom = roomMap.get(startRoomID);
 			        player.setCurrentRoomID(startRoomID);
 			        player.setCurrentRoom(currentRoom);
-
+		        
 			        // print room info
 			        System.out.println(currentRoom.getRoomName());
 			        System.out.println(currentRoom.getRoomDescr());
 			        System.out.println("Exits: " + currentRoom.getExits().keySet());
-					System.out.println();
+			        System.out.println();
 
+			        
 			        if (currentRoom.hasPuzzle()) {
 						currentRoom.getPuzzle().startPuzzle(player);
 					}
-					//player.startPuzzle();
+			        
+			        //player.startPuzzle();
 			        continue;
 				}
 			}
@@ -109,6 +110,9 @@ public class Game
 			{
 				String direction = input.substring(3).trim();
 				player.move(direction, roomMap);
+				
+				currentRoom = roomMap.get(player.getCurrentRoomID());
+			    player.setCurrentRoom(currentRoom);
 				continue;
 			}
 
@@ -142,7 +146,7 @@ public class Game
 			if(input.startsWith("use "))
 			{
 				String item = input.substring(4).trim();
-				player.useItem(item,roomMap);
+				player.useItem(item, roomMap);
 				continue;
 			}
 
@@ -187,10 +191,11 @@ public class Game
 					System.out.println("No monster with that name.\n");
 					continue;
 				}
-
+				
 				player.attack(monster); //go to combat mode
 				continue;
 			}
+			
 			if (input.startsWith("flee"))
 			{
 				
@@ -199,7 +204,7 @@ public class Game
 				if (arg.isEmpty())
 				{
 					System.out.println("Which direction do you want to flee?"
-							+ "(N/S/E/W or north/east/south/west)");
+							+ " (N/S/E/W or north/east/south/west)");
 					continue;
 				}
 				
@@ -237,8 +242,14 @@ public class Game
 			if (input.equals("load checkpoint")) 
 			{
 				System.out.println("Loading checkpoint...");
-			    player.loadGame("checkpoint.txt", characters, items, roomMap);
-			    continue;
+				player.loadGame("checkpoint.txt", characters, items, roomMap);
+
+				currentRoom = roomMap.get(player.getCurrentRoomID());
+				player.setCurrentRoom(currentRoom);
+
+				System.out.println("Loaded into: " + currentRoom.getRoomName());
+				continue;
+
 			}
 			
 			if(input.startsWith("load "))
@@ -253,6 +264,11 @@ public class Game
 		        
 				String fileName = parts[1] + ".txt";
 				player.loadGame(fileName, characters, items, roomMap);
+				
+				currentRoom = roomMap.get(player.getCurrentRoomID());
+				player.setCurrentRoom(currentRoom);
+
+				System.out.println("Loaded into: " + currentRoom.getRoomName());
 				continue;
 			}
 
