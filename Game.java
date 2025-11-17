@@ -400,23 +400,11 @@ public class Game
 		System.out.println(" equip <weapon>              | Equip a weapon from player inventory");
 		System.out.println(" unequip <weapon>            | Unequip a weapon from player inventory");
 		System.out.println(" attack <monster>            | Enter combat mode and attack a monster");
+		System.out.println(" flee                        | Player flees to the previous room");
+		System.out.println(" flee <N|S|E|W>              | Flee north, south, east, or west");
 		System.out.println(" save <filename>             | Save the game progress");
 		System.out.println(" load <filename>             | Load a saved file");
 		System.out.println(" load checkpoint             | Load a saved checkpoint file\n");
-	}
-    
-    private void helpInCombat() 
-	{
-		System.out.println("\n---------------- Help Menu In Combat-----------------------");
-		System.out.println(" inventory                 |  View inventory");
-		System.out.println(" inspect <item name>       |  View item details in inventory");
-		System.out.println(" equip <item name>         |  Equip item in inventory");
-		System.out.println(" unequip <item name>       |  Unequip item in inventory");
-		System.out.println(" use <item>                | Use/consume item in inventory");
-		System.out.println(" attack <monster>          | Enter combat mode and attack a monster");
-		System.out.println(" flee                      | Player flees to the previous room");
-		System.out.println(" flee <N|S|E|W>            | Flee north, south, east, or west");
-		System.out.println(" help                      |  Show help menu in combat\n");
 	}
 
     public static void main(String[] args)
