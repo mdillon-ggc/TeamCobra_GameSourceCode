@@ -178,5 +178,10 @@ Make sure puzzle mode resets when loading a save or checkpoint:
 
 You may also reset all puzzles by calling resetPuzzle() on each puzzle.
 
+AI Usage:
+Debugging errors involving typos and error messages like NullPointException.
+Read map command and making a pop-up of the map appear.
+
+
 Enjoy the heist!
 
