@@ -102,7 +102,7 @@ public class Room
 		if (player.hasItem(requiredKeyID)) 
 		{
 			locked = false;
-			System.out.println("requiredKeyID " + " used to unlock door.");
+			System.out.println(requiredKeyID + " used to unlock door.");
 			return true;
 		}
 
@@ -239,3 +239,4 @@ public class Room
 		this.eliteMercenary = eliteMerc;
 	}
 }
+
